@@ -1,0 +1,16 @@
+h2 {
+  line-height: 10px;
+}
+tr.q {
+  height: 40px;
+}
+td.success,td.error {
+  width: 100px;
+  color: white;
+}
+td.success {
+  background-color: green;
+}
+td.error {
+  background-color: red;
+}
