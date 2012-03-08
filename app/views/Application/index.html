@@ -4,10 +4,21 @@
 <table border='1'>
 <tbody>
 <tr class="q">
-<td>Q1</td><td class="${controllers.Application.test(models.Question1FunctionTest.class)}">足し算</td>
-<td>Q2</td><td class="${controllers.Application.test(models.Question2FunctionTest.class)}">引き算</td>
-<td>Q3</td><td class="error"></td>
-<td>Q4</td><td class="error"></td>
+%{
+tests = []
+tests << models.Question1AcceptanceTest
+tests << models.Question2AcceptanceTest
+tests << models.Question3AcceptanceTest
+tests << models.Question4AcceptanceTest
+
+tests.eachWithIndex { test ,i ->
+	out.print("<td>Q${i + 1}</td>")
+	question = test.getAnnotation(models.Question.class)
+	out.print('<td class="' + controllers.Application.test(test) + '">')
+	out.print(question?.value())
+	out.print('</td>')
+}
+}%
 </tr>
 <tr class="q">
 <td>Q5</td><td class="error"></td>
