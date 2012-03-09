@@ -1,7 +1,5 @@
 package controllers;
 
-import models.Question1AcceptanceTest;
-
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 

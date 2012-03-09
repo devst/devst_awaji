@@ -2,16 +2,11 @@ package models;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import questions.Question1;
-import questions.Question2;
 import questions.Question3;
-import answers.Answer1;
-import answers.Answer2;
 
 @Question("FizzBuzz")
 public class Question3AcceptanceTest {
