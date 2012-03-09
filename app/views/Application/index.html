@@ -11,10 +11,16 @@ tests << models.Question2
 tests << models.Question3
 tests << models.Question4
 
+answers = []
+answers << answers.a.Answer1
+answers << answers.a.Answer2
+answers << null //answers.a.Answer3
+answers << null //answers.a.Answer4
+
 tests.eachWithIndex { test ,i ->
 	out.print("<td>Q${i + 1}</td>")
 	question = test.getAnnotation(models.Question.class)
-	out.print('<td class="' + controllers.Application.test(test) + '">')
+	out.print('<td class="' + controllers.Application.test(test, answers[i]) + '">')
 	out.print(question?.value())
 	out.print('</td>')
 }

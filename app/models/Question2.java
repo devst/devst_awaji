@@ -13,11 +13,6 @@ public class Question2 {
 
 	private Answer2 sut;
 
-	@Before
-	public void setUp() {
-		sut = new answers.a.Answer2();
-	}
-
 	@Test
 	public void 母音() throws Exception {
 		assertThat(sut.execute('a'), is("あ"));
