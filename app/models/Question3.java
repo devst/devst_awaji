@@ -6,12 +6,13 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import questions.Question3;
+import answers.Answer3;
+
 
 @Question("FizzBuzz")
-public class Question3AcceptanceTest {
+public class Question3 {
 
-	private Question3 sut;
+	private Answer3 sut;
 
 	@Before
 	public void setUp() {

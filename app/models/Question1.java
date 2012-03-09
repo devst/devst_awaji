@@ -6,17 +6,16 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import questions.Question1;
 import answers.Answer1;
 
 @Question("足し算")
-public class Question1AcceptanceTest {
+public class Question1 {
 
-	private Question1 sut;
+	private Answer1 sut;
 
 	@Before
 	public void setUp() {
-		sut = new Answer1();
+		sut = new answers.a.Answer1();
 	}
 
 	@Test

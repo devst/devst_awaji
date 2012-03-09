@@ -6,10 +6,10 @@
 <tr class="q">
 %{
 tests = []
-tests << models.Question1AcceptanceTest
-tests << models.Question2AcceptanceTest
-tests << models.Question3AcceptanceTest
-tests << models.Question4AcceptanceTest
+tests << models.Question1
+tests << models.Question2
+tests << models.Question3
+tests << models.Question4
 
 tests.eachWithIndex { test ,i ->
 	out.print("<td>Q${i + 1}</td>")

@@ -6,17 +6,16 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import questions.Question2;
 import answers.Answer2;
 
 @Question("50音変換")
-public class Question2AcceptanceTest {
+public class Question2 {
 
-	private Question2 sut;
+	private Answer2 sut;
 
 	@Before
 	public void setUp() {
-		sut = new Answer2();
+		sut = new answers.a.Answer2();
 	}
 
 	@Test
