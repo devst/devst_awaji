@@ -9,6 +9,7 @@ import answers.Answer5;
 import org.junit.Before;
 import org.junit.Test;
 
+@Question("ローマ数字変換")
 public class Question5 {
 
 	private Answer5 sut;
