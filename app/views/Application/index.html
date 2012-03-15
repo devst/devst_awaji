@@ -1,54 +1,22 @@
 #{extends 'main.html' /}
 #{set title:'XP Workshop' /}
 <h2>XP Workshop</h2>
-<table border='1'>
-<tbody>
-<tr class="q">
 %{
-tests = []
-tests << models.Question1
-tests << models.Question2
-tests << models.Question3
-tests << models.Question4
+tests = controllers.Application.judgemans
+featureMap = controllers.Application.featureMap
 
-answers = []
-answers << answers.a.Answer1
-answers << answers.a.Answer2
-answers << null //answers.a.Answer3
-answers << null //answers.a.Answer4
-
-tests.eachWithIndex { test ,i ->
-	out.print("<td>Q${i + 1}</td>")
-	question = test.getAnnotation(models.Question.class)
-	out.print('<td class="' + controllers.Application.test(test, answers[i]) + '">')
-	out.print(question?.value())
-	out.print('</td>')
+featureMap.each { team, feature ->
+  out.print("<table border='1'>")
+  out.print("<caption>team: $team</caption>")
+  tests.eachWithIndex { test ,i ->
+    out.print('<tr class="q">')
+    out.print("<td>Q${i + 1}</td>")
+    question = test.getAnnotation(models.Question.class)
+    out.print('<td class="' + controllers.Application.test(test, feature[i]) + '">')
+    out.print(question?.value())
+    out.print('</td>')
+    out.print('</tr>')
+  }
+  out.print("</table>")
 }
 }%
-</tr>
-<tr class="q">
-<td>Q5</td><td class="error"></td>
-<td>Q6</td><td class="error"></td>
-<td>Q7</td><td class="error"></td>
-<td>Q8</td><td class="error"></td>
-</tr>
-<tr class="q">
-<td>Q9</td><td class="error"></td>
-<td>Q10</td><td class="error"></td>
-<td>Q11</td><td class="error"></td>
-<td>Q12</td><td class="error"></td>
-</tr>
-<tr class="q">
-<td>Q13</td><td class="error"></td>
-<td>Q14</td><td class="error"></td>
-<td>Q15</td><td class="error"></td>
-<td>Q16</td><td class="error"></td>
-</tr>
-<tr class="q">
-<td>Q17</td><td class="error"></td>
-<td>Q18</td><td class="error"></td>
-<td>Q19</td><td class="error"></td>
-<td>Q20</td><td class="error"></td>
-</tr>
-</tbody>
-</table>
