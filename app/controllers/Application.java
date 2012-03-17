@@ -1,11 +1,14 @@
 package controllers;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import models.Question;
 import models.Question1;
 import models.Question2;
 import models.Question3;
@@ -22,7 +25,23 @@ import play.mvc.Controller;
 public class Application extends Controller {
 
 	public static void index() {
-		render();
+		Map<String, List<Class<?>>> featureMap = getFeatureMap();
+		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
+		int featureIndex = 0;
+
+		for (Map.Entry<String, List<Class<?>>> feature : featureMap.entrySet()) {
+			String teamNm = feature.getKey();
+			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
+			for (Class<?> judgeman : judgemans) {
+				Question question = judgeman.getAnnotation(models.Question.class);
+				String questionNm = question.value();
+				String testResult = test(judgeman, feature.getValue().get(featureIndex));
+				scoreMap.put(questionNm, testResult);
+			}
+			resultMap.put(teamNm, scoreMap);
+			featureIndex++;
+		}
+		render(resultMap);
 	}
 
 	// TODO judgeman.jar から取得するようにする

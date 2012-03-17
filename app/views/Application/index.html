@@ -1,22 +1,21 @@
 #{extends 'main.html' /}
 #{set title:'XP Workshop' /}
-<h2>XP Workshop</h2>
-%{
-tests = controllers.Application.judgemans
-featureMap = controllers.Application.featureMap
-
-featureMap.each { team, feature ->
-  out.print("<table border='1'>")
-  out.print("<caption>team: $team</caption>")
-  tests.eachWithIndex { test ,i ->
-    out.print('<tr class="q">')
-    out.print("<td>Q${i + 1}</td>")
-    question = test.getAnnotation(models.Question.class)
-    out.print('<td class="' + controllers.Application.test(test, feature[i]) + '">')
-    out.print(question?.value())
-    out.print('</td>')
-    out.print('</tr>')
-  }
-  out.print("</table>")
-}
-}%
+#{set 'moreStyles'}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/index.css'}">
+#{/set}
+<h2>XP Workshop - スコアボード</h2>
+#{list items:resultMap, as:'result'}
+<div class="teamResult">
+  <table class="scoreboard">
+  <caption>${result.key}</caption>
+  %{questionNo = 1}%
+  #{list items:result.value, as:'score'}
+  <tr class="scoreboard">
+    <td class="scoreboard"><a href="../Input${questionNo}/show">Q.${questionNo}</a></td>
+    <td class="scoreboard ${score.value}">${score.key}</td>
+  </tr>
+  %{questionNo++}%
+  #{/list}
+  </table>
+</div>
+#{/list}
