@@ -1,0 +1,28 @@
+table.scoreboard {
+  border-collapse: collapse;
+}
+
+tr.scoreboard {
+  height: 40px;
+}
+
+td.scoreboard {
+  border: 1px solid gray;
+}
+
+td.success,td.error {
+  width: 100px;
+  color: white;
+}
+
+td.success {
+  background-color: green;
+}
+
+td.error {
+  background-color: red;
+}
+div.teamResult {
+  float: left;
+  margin: 10px;
+}
