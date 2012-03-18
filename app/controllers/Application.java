@@ -32,19 +32,15 @@ public class Application extends Controller {
 		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
 
 		for (Map.Entry<String, List<Class<?>>> feature : featureMap.entrySet()) {
-			int judgemanIndex = 0;
 			String teamNm = feature.getKey();
 			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
-			List<Class<?>> answerList = feature.getValue();
+			int questionIndex = 0;
 			for (Class<?> judgeman : judgemans) {
 				Question question = judgeman.getAnnotation(models.Question.class);
 				String questionNm = question.value();
-				String testResult = "error";
-				if (answerList.size() > judgemanIndex){
-					testResult = test(judgeman, answerList.get(judgemanIndex));
-				}
+				String testResult = test(judgeman, feature.getValue().get(questionIndex));
 				scoreMap.put(questionNm, testResult);
-				judgemanIndex++;
+				questionIndex++;
 			}
 			resultMap.put(teamNm, scoreMap);
 		}
@@ -63,8 +59,8 @@ public class Application extends Controller {
 	// TODO judgemans から組立てる
 	public static Map<String, List<Class<?>>> getFeatureMap() {
 		Map<String, List<Class<?>>> map = new HashMap<String, List<Class<?>>>();
-		map.put("えーちーむ", Arrays.asList(answers.a.Answer1.class, answers.a.Answer2.class, null, null));
-		map.put("ビィチィム", Arrays.asList(answers.a.Answer1.class, answers.a.Answer2.class, null, null));
+		map.put("えーちーむ", Arrays.asList(answers.a.Answer1.class, answers.a.Answer2.class, null, null, null));
+		map.put("ビィチィム", Arrays.asList(answers.a.Answer1.class, answers.a.Answer2.class, null, null, null));
 		return map;
 	}
 
