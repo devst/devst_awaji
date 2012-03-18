@@ -1,3 +1,23 @@
 h2 {
   line-height: 10px;
 }
+
+table {
+  border-collapse: collapse;
+  border: 1px solid gray;
+}
+
+th {
+  background-color: lime;
+}
+
+th, td {
+  border: 1px solid gray;
+}
+
+#messageArea {
+  margin-top: 10px;
+  height: 20px;
+  color: red;
+  overflow-y: scroll;
+}

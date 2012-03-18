@@ -24,22 +24,29 @@ import play.mvc.Controller;
 
 public class Application extends Controller {
 
+	/**
+	 * スコアボード表示
+	 */
 	public static void index() {
 		Map<String, List<Class<?>>> featureMap = getFeatureMap();
 		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
-		int featureIndex = 0;
 
 		for (Map.Entry<String, List<Class<?>>> feature : featureMap.entrySet()) {
+			int judgemanIndex = 0;
 			String teamNm = feature.getKey();
 			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
+			List<Class<?>> answerList = feature.getValue();
 			for (Class<?> judgeman : judgemans) {
 				Question question = judgeman.getAnnotation(models.Question.class);
 				String questionNm = question.value();
-				String testResult = test(judgeman, feature.getValue().get(featureIndex));
+				String testResult = "error";
+				if (answerList.size() > judgemanIndex){
+					testResult = test(judgeman, answerList.get(judgemanIndex));
+				}
 				scoreMap.put(questionNm, testResult);
+				judgemanIndex++;
 			}
 			resultMap.put(teamNm, scoreMap);
-			featureIndex++;
 		}
 		render(resultMap);
 	}
@@ -48,6 +55,11 @@ public class Application extends Controller {
 	public static Class<?>[] judgemans = { Question1.class, Question2.class,
 			Question3.class, Question4.class, Question5.class };
 
+	/**
+	 * 各チームのFeature実装クラスのマップを返す
+	 *
+	 * @return <チーム名, Feature実装クラスリスト>のマップ
+	 */
 	// TODO judgemans から組立てる
 	public static Map<String, List<Class<?>>> getFeatureMap() {
 		Map<String, List<Class<?>>> map = new HashMap<String, List<Class<?>>>();
@@ -56,6 +68,9 @@ public class Application extends Controller {
 		return map;
 	}
 
+	/**
+	 * judgemanのテストを実行する
+	 */
 	public static String test(Class<?> test, final Class<?> answer) {
 		Result result;
 		try {

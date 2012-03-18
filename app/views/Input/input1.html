@@ -1,18 +1,13 @@
 #{extends 'main.html' /}
-#{set title:'XP Workshop - 足し算' /}
+#{set title:'Q1 足し算' /}
 <form action="@{Input1.perform()}">
-<h2>XP Workshop - 足し算</h2>
-<div id="navigationArea">
-  <a href="@{Application.index()}">&lt;&lt;スコアボードに戻る</a>
-</div>
 <div id="inputArea">
+<h2>入力</h2>
   <input type="text" name="param1"  value="${param1}" />＋<input type="text" name="param2" value="${param2}"/><br>
   <input type="submit" id="btnExecute"  value="実行" /><br>
 </div>
-<div id="messageArea">
-${message}
-</div>
 <div id="resultArea">
+<h2>実行結果</h2>
 #{list items:resultMap, as:'result' }
   ${result.key} ${result.value}<br>
 #{/list}

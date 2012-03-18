@@ -1,9 +1,8 @@
 #{extends 'main.html' /}
-#{set title:'XP Workshop' /}
+#{set title:'スコアボード' /}
 #{set 'moreStyles'}
 <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/index.css'}">
 #{/set}
-<h2>XP Workshop - スコアボード</h2>
 #{list items:resultMap, as:'result'}
 <div class="teamResult">
   <table class="scoreboard">
@@ -11,7 +10,7 @@
   %{questionNo = 1}%
   #{list items:result.value, as:'score'}
   <tr class="scoreboard">
-    <td class="scoreboard"><a href="../Input${questionNo}/show">Q.${questionNo}</a></td>
+    <td class="scoreboard">Q${questionNo}</td>
     <td class="scoreboard ${score.value}">${score.key}</td>
   </tr>
   %{questionNo++}%

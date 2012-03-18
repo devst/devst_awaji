@@ -1,0 +1,20 @@
+#{extends 'main.html' /}
+#{set title:'Q3 FizzBuzz' /}
+<form action="@{Input3.perform()}">
+<h2>説明</h2>
+<div id="explanationArea">
+指定した正の整数が 3で割り切れる場合は "Fizz" 5で割り切れる場合は "Buzz" 3と5で割り切れる場合は"FizzBuzz"<br>
+3でも5でも割り切れない場合は、その数字 を文字列として答えを返す。
+</div>
+<h2>入力</h2>
+<div id="inputArea">
+  <input type="text" name="param1"  value="${param1}" /><br>
+  <input type="submit" id="btnExecute"  value="実行" /><br>
+</div>
+<h2>実行結果</h2>
+<div id="resultArea">
+#{list items:resultMap, as:'result' }
+  ${result.key} ${result.value}<br>
+#{/list}
+</div>
+</form>

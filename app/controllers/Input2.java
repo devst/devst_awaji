@@ -22,13 +22,13 @@ import answers.a.Answer1;
 import play.mvc.Controller;
 import play.mvc.Http.Request;
 
-public class Input1 extends Controller {
+public class Input2 extends Controller {
 
 	/**
 	 * 初期表示
 	 */
 	public static void show() {
-		renderTemplate("Input/input1.html");
+		renderTemplate("Input/input2.html");
 	}
 
 	/**
@@ -36,22 +36,20 @@ public class Input1 extends Controller {
 	 */
 	public static void perform() {
 		String param1 = params.get("param1");
-		String param2 = params.get("param2");
 		Map<String, String> resultMap = new HashMap<String, String>();
 		String message = "";
 
 		try {
-			int intParam1 = Integer.parseInt(param1);
-			int intParam2 = Integer.parseInt(param2);
 
+			char[] charParam1 = param1.toCharArray();
 			Map<String, List<Class<?>>> featureMap = Application.getFeatureMap();
 
 			for (Map.Entry<String, List<Class<?>>>  feature : featureMap.entrySet()) {
 				List<Class<?>> answerList = feature.getValue();
 				if (answerList.get(0) != null) {
 					try{
-						answers.Answer1 answer = (answers.Answer1)answerList.get(0).newInstance();
-						resultMap.put(feature.getKey(), Integer.toString(answer.plus(intParam1, intParam2)));
+						answers.Answer2 answer = (answers.Answer2)answerList.get(1).newInstance();
+						resultMap.put(feature.getKey(), answer.execute(charParam1));
 					} catch (Exception e) {
 						// チーム別の例外表示
 						resultMap.put(feature.getKey(), e.getMessage());
@@ -65,7 +63,7 @@ public class Input1 extends Controller {
 			message = e.getMessage();
 		}
 
-		renderTemplate("Input/input1.html", param1, param2, resultMap, message);
+		renderTemplate("Input/input2.html", param1, resultMap, message);
 	}
 
 }

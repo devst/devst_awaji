@@ -1,0 +1,74 @@
+#{extends 'main.html' /}
+#{set title:'Q4 ポーカー' /}
+<form action="@{Input4.perform()}">
+<h2>説明</h2>
+<div id="explanationArea">
+トランプのマークと番号を文字列として、5枚分を配列で渡し、その役(ハンド)を文字列として返す。 トランプは「マーク」+「番号」で表現する。<br>
+マーク: "S"= スペード / "H"= ハート / "C"= クローバー / "D"= ダイヤ<br>
+番号: 2~10 は数字そのまま / "J"=ジャック / "Q"= クィーン / "K"= キング / "A"= エース<br>
+例 "SA,H2,D3,C4,S5" =&gt; "ストレート" "HA,H2,S2,C2,SA" =&gt; "フルハウス"<br>
+<table>
+  <caption>役（ハンド）の名前と定義</caption>
+  <tr>
+    <th>名前</th>
+    <th>定義</th>
+  </tr>
+  <tr>
+    <td>ノーペア</td>
+    <td>下記のいずれの役にも当てはまらない。</td>
+  </tr>
+  <tr>
+    <td>ワンペア</td>
+    <td>同一ランク（数字）のカード2枚のペア1セット（残り3枚は何でもよい）。</td>
+  </tr>
+  <tr>
+    <td>ツーペア</td>
+    <td>同一ランク（数字）のカード2枚からなるペアが2セット（残り1枚は何でもよい）。</td>
+  </tr>
+  <tr>
+    <td>スリー・オブ・ア・カインド</td>
+    <td>同一ランク（数字）のカード3枚（残り2枚は何でもよい）。</td>
+  </tr>
+  <tr>
+    <td>ストレート</td>
+    <td>5枚のカードのランクが連続していること（スートは何でもよい）。</td>
+  </tr>
+  <tr>
+    <td>フラッシュ</td>
+    <td>5枚全てが同じスート（ランクは幾つでもよい）。</td>
+  </tr>
+  <tr>
+    <td>フルハウス</td>
+    <td>ワンペアとスリー・オブ・ア・カインドの組み合わせ。</td>
+  </tr>
+  <tr>
+    <td>フォー・オブ・ア・カインド</td>
+    <td>同一ランク（数字）のカード4枚（残り1枚は何でもよい）。</td>
+  </tr>
+  <tr>
+    <td>ストレートフラッシュ</td>
+    <td>5枚のカードが連番で、なおかつ全て同じスート。</td>
+  </tr>
+  <tr>
+    <td>ロイヤルストレートフラッシュ</td>
+    <td>10・ジャック・クイーン・キング・エースの組み合わせで、なおかつ全て同じスート。</td>
+  </tr>
+</table>
+</div>
+<h2>入力</h2>
+<div id="inputArea">
+<input type="text" name="param1"  value="${param1}"  maxlength="3" size="4" />
+<input type="text" name="param2"  value="${param2}"  maxlength="3" size="4"/>
+<input type="text" name="param3"  value="${param3}"  maxlength="3" size="4"/>
+<input type="text" name="param4"  value="${param4}"  maxlength="3" size="4"/>
+<input type="text" name="param5"  value="${param5}"  maxlength="3" size="4"/>
+<br>
+  <input type="submit" id="btnExecute"  value="実行" /><br>
+</div>
+<h2>実行結果</h2>
+<div id="resultArea">
+#{list items:resultMap, as:'result' }
+  ${result.key} ${result.value}<br>
+#{/list}
+</div>
+</form>
