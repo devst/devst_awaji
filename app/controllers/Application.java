@@ -56,12 +56,24 @@ public class Application extends Controller {
 	 *
 	 * @return <チーム名, Feature実装クラスリスト>のマップ
 	 */
-	// TODO judgemans から組立てる
 	public static Map<String, List<Class<?>>> getFeatureMap() {
 		Map<String, List<Class<?>>> map = new HashMap<String, List<Class<?>>>();
-		map.put("えーちーむ", Arrays.asList(answers.a.Answer1.class, answers.a.Answer2.class, null, null, null));
-		map.put("ビィチィム", Arrays.asList(answers.a.Answer1.class, answers.a.Answer2.class, null, null, null));
+		map.put("えーちーむ", createFeatureList("answers.a"));
+		map.put("ビィチィム", createFeatureList("answers.a"));
 		return map;
+	}
+
+	private static List<Class<? extends Object>> createFeatureList(String pkg) {
+		List<Class<?>> list = new ArrayList<Class<?>>(judgemans.length);
+
+		for (Class<?> clz : judgemans) {
+			try {
+				list.add(Class.forName(pkg + "." + clz.getSimpleName().replace("Question", "Answer")));
+			} catch (ClassNotFoundException e) {
+				list.add(null);
+			}
+		}
+		return list;
 	}
 
 	/**
