@@ -1,26 +1,10 @@
 package controllers;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import models.Question1;
-import models.Question2;
-import models.Question3;
-import models.Question4;
-import models.Question5;
-
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runners.BlockJUnit4ClassRunner;
-import org.junit.runners.model.InitializationError;
-
-import answers.a.Answer1;
-
 import play.mvc.Controller;
-import play.mvc.Http.Request;
 
 public class Input2 extends Controller {
 

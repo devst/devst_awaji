@@ -2,18 +2,17 @@ package controllers;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import models.Question;
-import models.Question1;
-import models.Question2;
-import models.Question3;
-import models.Question4;
-import models.Question5;
+import judges.Judge;
+import judges.Judge1;
+import judges.Judge2;
+import judges.Judge3;
+import judges.Judge4;
+import judges.Judge5;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -36,8 +35,8 @@ public class Application extends Controller {
 			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
 			int questionIndex = 0;
 			for (Class<?> judgeman : judgemans) {
-				Question question = judgeman.getAnnotation(models.Question.class);
-				String questionNm = question.value();
+				Judge judge = judgeman.getAnnotation(Judge.class);
+				String questionNm = judge.value();
 				String testResult = test(judgeman, feature.getValue().get(questionIndex));
 				scoreMap.put(questionNm, testResult);
 				questionIndex++;
@@ -48,8 +47,8 @@ public class Application extends Controller {
 	}
 
 	// TODO judgeman.jar から取得するようにする
-	public static Class<?>[] judgemans = { Question1.class, Question2.class,
-			Question3.class, Question4.class, Question5.class };
+	public static Class<?>[] judgemans = { Judge1.class, Judge2.class,
+		Judge3.class, Judge4.class, Judge5.class };
 
 	/**
 	 * 各チームのFeature実装クラスのマップを返す
@@ -68,7 +67,7 @@ public class Application extends Controller {
 
 		for (Class<?> clz : judgemans) {
 			try {
-				list.add(Class.forName(pkg + "." + clz.getSimpleName().replace("Question", "Answer")));
+				list.add(Class.forName(pkg + "." + clz.getSimpleName().replace("Judge", "Answer")));
 			} catch (ClassNotFoundException e) {
 				list.add(null);
 			}
