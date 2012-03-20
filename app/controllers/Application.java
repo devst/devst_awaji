@@ -19,26 +19,37 @@ import org.junit.runner.Result;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
+import answers.Index;
+
 import play.mvc.Controller;
 
 public class Application extends Controller {
+
+	/**
+	 * スコアボードに表示するインタフェースのリスト
+	 */
+	private static List<Class<?>> featureList = Index.getList();
 
 	/**
 	 * スコアボード表示
 	 */
 	public static void index() {
 		Map<String, List<Class<?>>> featureMap = getFeatureMap();
-		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
+		List<Class<?>> judgemen = createJudgemanList();
 
+		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
 		for (Map.Entry<String, List<Class<?>>> feature : featureMap.entrySet()) {
 			String teamNm = feature.getKey();
 			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
 			int questionIndex = 0;
-			for (Class<?> judgeman : judgemans) {
-				Judge judge = judgeman.getAnnotation(Judge.class);
-				String questionNm = judge.value();
-				String testResult = test(judgeman, feature.getValue().get(questionIndex));
-				scoreMap.put(questionNm, testResult);
+
+			for (Class<?> judgeman : judgemen) {
+				if (judgeman != null) {
+					Judge judge = judgeman.getAnnotation(Judge.class);
+					String questionNm = judge.value();
+					String testResult = test(judgeman, feature.getValue().get(questionIndex));
+					scoreMap.put(questionNm, testResult);
+				}
 				questionIndex++;
 			}
 			resultMap.put(teamNm, scoreMap);
@@ -46,9 +57,22 @@ public class Application extends Controller {
 		render(resultMap);
 	}
 
-	// TODO judgeman.jar から取得するようにする
-	public static Class<?>[] judgemans = { Judge1.class, Judge2.class,
-		Judge3.class, Judge4.class, Judge5.class };
+	/**
+	 * FearureListからJudgemanのリストを作成する。
+	 * @return Judgemanリスト
+	 */
+	private static List<Class<?>> createJudgemanList() {
+		List<Class<?>> judgemen = new ArrayList<Class<?>>();
+		for (Class<?> clz : featureList) {
+			try {
+				judgemen.add(Class.forName("judges." + clz.getSimpleName().replace("Answer", "Judge")));
+			} catch (ClassNotFoundException e) {
+				// 未作成のjudgeman
+				judgemen.add(null);
+			}
+		}
+		return judgemen;
+	}
 
 	/**
 	 * 各チームのFeature実装クラスのマップを返す
@@ -57,18 +81,25 @@ public class Application extends Controller {
 	 */
 	public static Map<String, List<Class<?>>> getFeatureMap() {
 		Map<String, List<Class<?>>> map = new HashMap<String, List<Class<?>>>();
-		map.put("えーちーむ", createFeatureList("answers.a"));
-		map.put("ビィチィム", createFeatureList("answers.a"));
+		map.put("えーちーむ", createTeamFeatureList("answers.a"));
+		map.put("ビィチィム", createTeamFeatureList("answers.a"));
 		return map;
 	}
 
-	private static List<Class<? extends Object>> createFeatureList(String pkg) {
-		List<Class<?>> list = new ArrayList<Class<?>>(judgemans.length);
+	/**
+	 * チーム毎のFeature実装クラスのリストを取得する
+	 * @param pkg パッケージ名(チーム毎に固定)
+	 * @return クラスのリスト
+	 */
+	private static List<Class<? extends Object>> createTeamFeatureList(String pkg) {
 
-		for (Class<?> clz : judgemans) {
+		List<Class<?>> list = new ArrayList<Class<?>>();
+		for (Class<?> clz : featureList) {
 			try {
-				list.add(Class.forName(pkg + "." + clz.getSimpleName().replace("Judge", "Answer")));
+				// 実装済み
+				list.add(Class.forName(pkg + "." + clz.getSimpleName()));
 			} catch (ClassNotFoundException e) {
+				// 未実装
 				list.add(null);
 			}
 		}
