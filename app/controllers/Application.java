@@ -13,8 +13,8 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
 import play.mvc.Controller;
-import answers.Index;
-import answers.Index.Entry;
+import features.Index;
+import features.Index.Entry;
 
 public class Application extends Controller {
 

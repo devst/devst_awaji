@@ -32,7 +32,7 @@ public class Input2 extends Controller {
 				List<Class<?>> answerList = feature.getValue();
 				if (answerList.get(0) != null) {
 					try{
-						answers.Answer2 answer = (answers.Answer2)answerList.get(1).newInstance();
+						features.Answer2 answer = (features.Answer2)answerList.get(1).newInstance();
 						resultMap.put(feature.getKey(), answer.execute(charParam1));
 					} catch (Exception e) {
 						// チーム別の例外表示

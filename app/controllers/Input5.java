@@ -31,7 +31,7 @@ public class Input5 extends Controller {
 				List<Class<?>> answerList = feature.getValue();
 				if (answerList.get(0) != null) {
 					try{
-						answers.Answer5 answer = (answers.Answer5)answerList.get(4).newInstance();
+						features.Answer5 answer = (features.Answer5)answerList.get(4).newInstance();
 						resultMap.put(feature.getKey(), String.valueOf(answer.toInt(param1)));
 					} catch (Exception e) {
 						// チーム別の例外表示

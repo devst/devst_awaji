@@ -36,7 +36,7 @@ public class Input4 extends Controller {
 				List<Class<?>> answerList = feature.getValue();
 				if (answerList.get(0) != null) {
 					try{
-						answers.Answer4 answer = (answers.Answer4)answerList.get(3).newInstance();
+						features.Answer4 answer = (features.Answer4)answerList.get(3).newInstance();
 						resultMap.put(feature.getKey(), answer.poker(params));
 					} catch (Exception e) {
 						// チーム別の例外表示

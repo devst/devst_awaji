@@ -31,7 +31,7 @@ public class Input3 extends Controller {
 				List<Class<?>> answerList = feature.getValue();
 				if (answerList.get(0) != null) {
 					try{
-						answers.Answer3 answer = (answers.Answer3)answerList.get(2).newInstance();
+						features.Answer3 answer = (features.Answer3)answerList.get(2).newInstance();
 						resultMap.put(feature.getKey(), answer.fizzBuzz(intParam1));
 					} catch (Exception e) {
 						// チーム別の例外表示
