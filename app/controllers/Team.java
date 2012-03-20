@@ -2,8 +2,8 @@ package controllers;
 
 public enum Team {
 
-	A("えーちーむ", "answers.a"),
-	B("B-TEAM", "answers.b"),
+	A("えーちーむ", "features.a"),
+	B("B-TEAM", "features.b"),
 	;
 
 	final String teamName;
