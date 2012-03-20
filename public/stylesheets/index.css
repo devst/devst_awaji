@@ -3,10 +3,10 @@ tr.scoreboard {
 }
 
 td.scoreboard {
-  border: 1px solid gray;
+  border: 3px solid black;
 }
 
-td.success,td.error {
+td.success,td.error,td.notyet{
   width: 100px;
   color: white;
 }
@@ -18,6 +18,11 @@ td.success {
 td.error {
   background-color: red;
 }
+
+td.notyet {
+  background-color: gray;
+}
+
 div.teamResult {
   float: left;
   margin: 10px;
