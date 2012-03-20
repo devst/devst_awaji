@@ -7,58 +7,42 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import judges.Judge;
-import judges.Judge1;
-import judges.Judge2;
-import judges.Judge3;
-import judges.Judge4;
-import judges.Judge5;
-
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
-import answers.Index;
-import answers.Index.Double;
-
 import play.mvc.Controller;
+import answers.Index;
+import answers.Index.Entry;
 
 public class Application extends Controller {
 
 	/**
 	 * スコアボードに表示するインタフェースのリスト
 	 */
-	private static List<Double> index = Index.getList();
+	private static List<Entry> index = Index.getList();
 
 	/**
 	 * スコアボード表示
 	 */
 	public static void index() {
-		Map<String, List<Class<?>>> featureMap = getFeatureMap();
-
-		Map<String, Map<String, String>> resultMap = createResultMap(featureMap);
+		Map<String, Map<String, String>> resultMap = createResultMap();
 		render(resultMap);
 	}
 
-	protected static Map<String, Map<String, String>> createResultMap(Map<String, List<Class<?>>> featureMap) {
-		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
-		for (Map.Entry<String, List<Class<?>>> feature : featureMap.entrySet()) {
-			String teamNm = feature.getKey();
-			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
-			int questionIndex = 0;
+	protected static Map<String, Map<String, String>> createResultMap() {
 
-			for (Double d : index) {
-				Class<?> judgeman = d.judgeman;
-				if (judgeman != null) {
-					Judge judge = judgeman.getAnnotation(Judge.class);
-					String questionNm = judge.value();
-					String testResult = test(judgeman, feature.getValue().get(questionIndex));
-					scoreMap.put(questionNm, testResult);
-				}
-				questionIndex++;
+		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
+		for (Team team : Team.values()) {
+			Feature feature = new Feature(team);
+			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
+
+			for (Entry e : index) {
+				String testResult = test(e.judgeman, feature.getFeature(e.feature));
+				scoreMap.put(e.name, testResult);
 			}
-			resultMap.put(teamNm, scoreMap);
+			resultMap.put(team.teamName, scoreMap);
 		}
 		return resultMap;
 	}
@@ -68,6 +52,7 @@ public class Application extends Controller {
 	 * 
 	 * @return <チーム名, Feature実装クラスリスト>のマップ
 	 */
+	@Deprecated
 	public static Map<String, List<Class<?>>> getFeatureMap() {
 		Map<String, List<Class<?>>> map = new HashMap<String, List<Class<?>>>();
 		map.put("えーちーむ", createTeamFeatureList("a"));
@@ -82,10 +67,11 @@ public class Application extends Controller {
 	 *            パッケージ名(チーム毎に固定)
 	 * @return クラスのリスト
 	 */
+	@Deprecated
 	private static List<Class<? extends Object>> createTeamFeatureList(String team) {
 
 		List<Class<?>> list = new ArrayList<Class<?>>();
-		for (Double d : index) {
+		for (Entry d : index) {
 			try {
 				// 実装済み
 				list.add(Class.forName("answers." + team + "." + d.feature.getSimpleName()));
