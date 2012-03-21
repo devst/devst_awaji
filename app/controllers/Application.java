@@ -47,42 +47,6 @@ public class Application extends Controller {
 	}
 
 	/**
-	 * 各チームのFeature実装クラスのマップを返す
-	 * 
-	 * @return <チーム名, Feature実装クラスリスト>のマップ
-	 */
-	@Deprecated
-	public static Map<String, List<Class<?>>> getFeatureMap() {
-		Map<String, List<Class<?>>> map = new HashMap<String, List<Class<?>>>();
-		map.put("えーちーむ", createTeamFeatureList("a"));
-		map.put("ビィチィム", createTeamFeatureList("b"));
-		return map;
-	}
-
-	/**
-	 * チーム毎のFeature実装クラスのリストを取得する
-	 * 
-	 * @param team
-	 *            パッケージ名(チーム毎に固定)
-	 * @return クラスのリスト
-	 */
-	@Deprecated
-	private static List<Class<? extends Object>> createTeamFeatureList(String team) {
-
-		List<Class<?>> list = new ArrayList<Class<?>>();
-		for (Entry d : index) {
-			try {
-				// 実装済み
-				list.add(Class.forName("features." + team + "." + d.feature.getSimpleName()));
-			} catch (ClassNotFoundException e) {
-				// 未実装
-				list.add(null);
-			}
-		}
-		return list;
-	}
-
-	/**
 	 * judgemanのテストを実行する
 	 */
 	public static String test(Class<?> test, final Class<?> answer) {
