@@ -39,11 +39,13 @@ public class Input2 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
+		final char[] param = args[0].toCharArray();
+
 		return new TeamFeatureRunner<JapaneseSyllabary>(JapaneseSyllabary.class) {
 			@Override
-			public String run(JapaneseSyllabary feature, String... args) throws Exception {
-				return feature.execute(args[0].toCharArray());
+			public String run(JapaneseSyllabary feature) throws Exception {
+				return feature.execute(param);
 			}
-		}.run(args);
+		}.run();
 	}
 }

@@ -26,7 +26,7 @@ abstract class TeamFeatureRunner<T> {
 	 * @param params パラメータ
 	 * @return 各チームの出力を値とするEnumMap
 	 */
-	EnumMap<Team, String> run(String... params) {
+	EnumMap<Team, String> run() {
 		EnumMap<Team, String> resultMap = new EnumMap<Team, String>(Team.class);
 
 		for (Team team : Team.values()) {
@@ -36,7 +36,7 @@ abstract class TeamFeatureRunner<T> {
 				result = "";
 			} else {
 				try {
-					result = run(featureClass, params);
+					result = run(featureClass);
 				} catch (Exception e) {
 					result = e.toString();
 				}
@@ -49,20 +49,18 @@ abstract class TeamFeatureRunner<T> {
 	/**
 	 * インスタンス生成がデフォルトコンストラクタで出来ない場合、このメソッドをオーバーライドしてください。
 	 * @param featureClass チーム毎のfeatureクラス
-	 * @param params パラメータ
 	 * @return 処理結果
 	 * @throws Exception
 	 */
-	protected String run(Class<T> featureClass, String... params) throws Exception {
-		return run(featureClass.newInstance(), params);
+	protected String run(Class<T> featureClass) throws Exception {
+		return run(featureClass.newInstance());
 	}
 
 	/**
 	 * 各Featureの処理を実行し、処理結果を文字列で返します。
 	 * @param feature チーム毎のfeatureインスタンス
-	 * @param params パラメータ
 	 * @return 処理結果
 	 * @throws Exception
 	 */
-	protected abstract String run(T feature, String... params) throws Exception;
+	protected abstract String run(T feature) throws Exception;
 }

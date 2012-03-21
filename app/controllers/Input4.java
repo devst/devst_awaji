@@ -42,12 +42,12 @@ public class Input4 extends Controller {
 	 * @param args パラメータ
 	 * @return 各チームの出力を値とするEnumMap
 	 */
-	protected static EnumMap<Team, String> execute(String... args) {
+	protected static EnumMap<Team, String> execute(final String... args) {
 		return new TeamFeatureRunner<Answer4>(Answer4.class) {
 			@Override
-			public String run(Answer4 feature, String... args) throws Exception {
+			public String run(Answer4 feature) throws Exception {
 				return feature.poker(args);
 			}
-		}.run(args);
+		}.run();
 	}
 }

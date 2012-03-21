@@ -40,15 +40,15 @@ public class Input1 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
+		final int i = Integer.valueOf(args[0]);
+		final int j = Integer.valueOf(args[1]);
+
 		return new TeamFeatureRunner<Answer1>(Answer1.class) {
 			@Override
-			public String run(Answer1 feature, String... args) throws Exception {
-				int i = Integer.valueOf(args[0]);
-				int j = Integer.valueOf(args[1]);
-
+			public String run(Answer1 feature) throws Exception {
 				int result = feature.plus(i, j);
 				return String.valueOf(result);
 			}
-		}.run(args);
+		}.run();
 	}
 }

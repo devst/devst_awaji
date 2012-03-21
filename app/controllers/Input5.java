@@ -38,12 +38,12 @@ public class Input5 extends Controller {
 	 * @param args パラメータ
 	 * @return 各チームの出力を値とするEnumMap
 	 */
-	protected static EnumMap<Team, String> execute(String... args) {
+	protected static EnumMap<Team, String> execute(final String... args) {
 		return new TeamFeatureRunner<Answer5>(Answer5.class) {
 			@Override
-			public String run(Answer5 feature, String... args) throws Exception {
+			public String run(Answer5 feature) throws Exception {
 				return String.valueOf(feature.toInt(args[0]));
 			}
-		}.run(args);
+		}.run();
 	}
 }

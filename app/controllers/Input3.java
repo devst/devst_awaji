@@ -39,11 +39,12 @@ public class Input3 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
+		final int i = Integer.valueOf(args[0]);
 		return new TeamFeatureRunner<Answer3>(Answer3.class) {
 			@Override
-			public String run(Answer3 feature, String... args) throws Exception {
-				return feature.fizzBuzz(Integer.valueOf(args[0]));
-			} 
-		}.run(args);
+			public String run(Answer3 feature) throws Exception {
+				return feature.fizzBuzz(i);
+			}
+		}.run();
 	}
 }
