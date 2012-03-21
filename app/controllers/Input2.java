@@ -1,18 +1,19 @@
 package controllers;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.EnumMap;
 
 import play.mvc.Controller;
+import features.JapaneseSyllabary;
 
 public class Input2 extends Controller {
+
+	private static final String TEMPLATE = "Input/input2.html";
 
 	/**
 	 * 初期表示
 	 */
 	public static void show() {
-		renderTemplate("Input/input2.html");
+		renderTemplate(TEMPLATE);
 	}
 
 	/**
@@ -20,34 +21,29 @@ public class Input2 extends Controller {
 	 */
 	public static void perform() {
 		String param1 = params.get("param1");
-		Map<String, String> resultMap = new HashMap<String, String>();
-		String message = "";
 
 		try {
-
-			char[] charParam1 = param1.toCharArray();
-			Map<String, List<Class<?>>> featureMap = Application.getFeatureMap();
-
-			for (Map.Entry<String, List<Class<?>>>  feature : featureMap.entrySet()) {
-				List<Class<?>> answerList = feature.getValue();
-				if (answerList.get(0) != null) {
-					try{
-						features.JapaneseSyllabary answer = (features.JapaneseSyllabary)answerList.get(1).newInstance();
-						resultMap.put(feature.getKey(), answer.execute(charParam1));
-					} catch (Exception e) {
-						// チーム別の例外表示
-						resultMap.put(feature.getKey(), e.getMessage());
-					}
-				} else {
-					resultMap.put(feature.getKey(), "");
-				}
-			}
+			EnumMap<Team, String> resultMap = execute(param1);
+			renderTemplate(TEMPLATE, param1, resultMap);
 		} catch (Exception e) {
 			// チームのメソッドに渡す前にエラーだったら全体メッセージ表示
-			message = e.getMessage();
+			String message = e.getMessage();
+			renderTemplate(TEMPLATE, param1, message);
 		}
-
-		renderTemplate("Input/input2.html", param1, resultMap, message);
 	}
 
+	/**
+	 * 全チームの実装クラスを実行する。
+	 * 
+	 * @param args パラメータ
+	 * @return 各チームの出力を値とするEnumMap
+	 */
+	protected static EnumMap<Team, String> execute(String... args) {
+		return new TeamFeatureRunner<JapaneseSyllabary>(JapaneseSyllabary.class) {
+			@Override
+			public String run(JapaneseSyllabary feature, String... args) throws Exception {
+				return feature.execute(args[0].toCharArray());
+			}
+		}.run(args);
+	}
 }

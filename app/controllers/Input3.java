@@ -1,18 +1,19 @@
 package controllers;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.EnumMap;
 
 import play.mvc.Controller;
+import features.Answer3;
 
 public class Input3 extends Controller {
+
+	private static final String TEMPLATE = "Input/input3.html";
 
 	/**
 	 * 初期表示
 	 */
 	public static void show() {
-		renderTemplate("Input/input3.html");
+		renderTemplate(TEMPLATE);
 	}
 
 	/**
@@ -20,33 +21,29 @@ public class Input3 extends Controller {
 	 */
 	public static void perform() {
 		String param1 = params.get("param1");
-		Map<String, String> resultMap = new HashMap<String, String>();
-		String message = "";
 
 		try {
-			Map<String, List<Class<?>>> featureMap = Application.getFeatureMap();
-
-			for (Map.Entry<String, List<Class<?>>>  feature : featureMap.entrySet()) {
-				int intParam1 = Integer.parseInt(param1);
-				List<Class<?>> answerList = feature.getValue();
-				if (answerList.get(0) != null) {
-					try{
-						features.Answer3 answer = (features.Answer3)answerList.get(2).newInstance();
-						resultMap.put(feature.getKey(), answer.fizzBuzz(intParam1));
-					} catch (Exception e) {
-						// チーム別の例外表示
-						resultMap.put(feature.getKey(), e.getMessage());
-					}
-				} else {
-					resultMap.put(feature.getKey(), "");
-				}
-			}
+			EnumMap<Team, String> resultMap = execute(param1);
+			renderTemplate(TEMPLATE, param1, resultMap);
 		} catch (Exception e) {
 			// チームのメソッドに渡す前にエラーだったら全体メッセージ表示
-			message = e.getMessage();
+			String message = e.getMessage();
+			renderTemplate(TEMPLATE, param1, message);
 		}
-
-		renderTemplate("Input/input3.html", param1, resultMap, message);
 	}
 
+	/**
+	 * 全チームの実装クラスを実行する。
+	 * 
+	 * @param args パラメータ
+	 * @return 各チームの出力を値とするEnumMap
+	 */
+	protected static EnumMap<Team, String> execute(String... args) {
+		return new TeamFeatureRunner<Answer3>(Answer3.class) {
+			@Override
+			public String run(Answer3 feature, String... args) throws Exception {
+				return feature.fizzBuzz(Integer.valueOf(args[0]));
+			} 
+		}.run(args);
+	}
 }

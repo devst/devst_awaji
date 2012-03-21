@@ -1,18 +1,19 @@
 package controllers;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.EnumMap;
 
 import play.mvc.Controller;
+import features.Answer4;
 
 public class Input4 extends Controller {
+
+	private static final String TEMPLATE = "Input/input4.html";
 
 	/**
 	 * 初期表示
 	 */
 	public static void show() {
-		renderTemplate("Input/input4.html");
+		renderTemplate(TEMPLATE);
 	}
 
 	/**
@@ -24,34 +25,29 @@ public class Input4 extends Controller {
 		String param3 = params.get("param3");
 		String param4 = params.get("param4");
 		String param5 = params.get("param5");
-		Map<String, String> resultMap = new HashMap<String, String>();
-		String message = "";
 
 		try {
-
-			String params[] = {param1, param2, param3, param4, param5};
-			Map<String, List<Class<?>>> featureMap = Application.getFeatureMap();
-
-			for (Map.Entry<String, List<Class<?>>>  feature : featureMap.entrySet()) {
-				List<Class<?>> answerList = feature.getValue();
-				if (answerList.get(0) != null) {
-					try{
-						features.Answer4 answer = (features.Answer4)answerList.get(3).newInstance();
-						resultMap.put(feature.getKey(), answer.poker(params));
-					} catch (Exception e) {
-						// チーム別の例外表示
-						resultMap.put(feature.getKey(), e.getMessage());
-					}
-				} else {
-					resultMap.put(feature.getKey(), "");
-				}
-			}
+			EnumMap<Team, String> resultMap = execute(param1, param2, param3, param4, param5);
+			renderTemplate(TEMPLATE, param1, param2, param3, param4, param5, resultMap);
 		} catch (Exception e) {
 			// チームのメソッドに渡す前にエラーだったら全体メッセージ表示
-			message = e.getMessage();
+			String message = e.getMessage();
+			renderTemplate(TEMPLATE, param1, param2, param3, param4, param5, message);
 		}
-
-		renderTemplate("Input/input4.html", param1, param2, param3, param4, param5, resultMap, message);
 	}
 
+	/**
+	 * 全チームの実装クラスを実行する。
+	 * 
+	 * @param args パラメータ
+	 * @return 各チームの出力を値とするEnumMap
+	 */
+	protected static EnumMap<Team, String> execute(String... args) {
+		return new TeamFeatureRunner<Answer4>(Answer4.class) {
+			@Override
+			public String run(Answer4 feature, String... args) throws Exception {
+				return feature.poker(args);
+			}
+		}.run(args);
+	}
 }
