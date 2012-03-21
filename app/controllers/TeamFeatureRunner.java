@@ -38,7 +38,7 @@ abstract class TeamFeatureRunner<T> {
 				try {
 					result = run(featureClass, params);
 				} catch (Exception e) {
-					result = e.getMessage();
+					result = e.toString();
 				}
 			}
 			resultMap.put(team, result);
