@@ -31,7 +31,7 @@ abstract class TeamFeatureRunner<T> {
 
 		for (Team team : Team.values()) {
 			String result;
-			Class<T> featureClass = Feature.getFeature(team, featureInterface);
+			Class<T> featureClass = team.getFeature(featureInterface);
 			if (featureClass == null) {
 				result = "";
 			} else {

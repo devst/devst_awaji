@@ -35,11 +35,10 @@ public class Application extends Controller {
 
 		Map<String, Map<String, String>> resultMap = new LinkedHashMap<String, Map<String, String>>();
 		for (Team team : Team.values()) {
-			Feature feature = new Feature(team);
 			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
 
 			for (Entry e : index) {
-				String testResult = test(e.judgeman, feature.getFeature(e.feature));
+				String testResult = test(e.judgeman, team.getFeature(e.feature));
 				scoreMap.put(e.name, testResult);
 			}
 			resultMap.put(team.teamName, scoreMap);
