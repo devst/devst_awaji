@@ -19,11 +19,11 @@ public class Feature {
 	 * @param featureInterface Featureインタフェースの型
 	 * @return 実装クラスの型
 	 */
-	public Class<?> getFeature(Class<?> featureInterface) {
+	public <T> Class<T> getFeature(Class<T> featureInterface) {
 		try {
-			return Class.forName(team.pkg + "." + featureInterface.getSimpleName());
+			return (Class<T>) Class.forName(team.pkg + "." + featureInterface.getSimpleName());
 		} catch (ClassNotFoundException e) {
-			return DUMMY;
+			return (Class<T>) DUMMY;
 		}
 	}
 
@@ -33,8 +33,8 @@ public class Feature {
 	 * @param featureInterface Featureインタフェースの型
 	 * @return 実装クラスの型
 	 */
-	public static Class<?> getFeature(Team team, Class<?> clz) {
-		return new Feature(team).getFeature(clz);
+	public static <T> Class<T> getFeature(Team team, Class<T> featureInterface) {
+		return new Feature(team).getFeature(featureInterface);
 	}
 
 	

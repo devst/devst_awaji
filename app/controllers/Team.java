@@ -12,6 +12,10 @@ public enum Team {
 	Team(String teamName, String pkg) {
 		this.teamName = teamName;
 		this.pkg = pkg;
-		
+	}
+
+	@Override
+	public String toString() {
+		return teamName;
 	}
 }
