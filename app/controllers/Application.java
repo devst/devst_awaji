@@ -74,7 +74,7 @@ public class Application extends Controller {
 		for (Entry d : index) {
 			try {
 				// 実装済み
-				list.add(Class.forName("answers." + team + "." + d.feature.getSimpleName()));
+				list.add(Class.forName("features." + team + "." + d.feature.getSimpleName()));
 			} catch (ClassNotFoundException e) {
 				// 未実装
 				list.add(null);
