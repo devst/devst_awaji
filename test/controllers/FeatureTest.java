@@ -19,8 +19,8 @@ public class FeatureTest extends UnitTest {
 	@Test
 	public void 該当チームの実装クラスを取得する2() {
 		Feature sut = new Feature(Team.A);
-		Class actual = sut.getFeature(features.Answer2.class);
-		assertThat(actual, is(sameInstance(features.a.Answer2.class)));
+		Class actual = sut.getFeature(features.JapaneseSyllabary.class);
+		assertThat(actual, is(sameInstance(features.a.JapaneseSyllabary.class)));
 	}
 
 	@Test
