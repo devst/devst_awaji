@@ -3,7 +3,7 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.Answer1;
+import features.Calculator;
 
 public class Input1 extends Controller {
 
@@ -21,15 +21,14 @@ public class Input1 extends Controller {
 	 */
 	public static void perform() {
 		String param1 = params.get("param1");
-		String param2 = params.get("param2");
 
 		try {
-			EnumMap<Team, String> resultMap = execute(param1, param2);
-			renderTemplate(TEMPLATE, param1, param2, resultMap);
+			EnumMap<Team, String> resultMap = execute(param1);
+			renderTemplate(TEMPLATE, param1, resultMap);
 		} catch (Exception e) {
 			// チームのメソッドに渡す前にエラーだったら全体メッセージ表示
 			String message = e.getMessage();
-			renderTemplate(TEMPLATE, param1, param2, message);
+			renderTemplate(TEMPLATE, param1, message);
 		}
 	}
 
@@ -40,14 +39,12 @@ public class Input1 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
-		final int i = Integer.valueOf(args[0]);
-		final int j = Integer.valueOf(args[1]);
+		final String formula = args[0];
 
-		return new TeamFeatureRunner<Answer1>(Answer1.class) {
+		return new TeamFeatureRunner<Calculator>(Calculator.class) {
 			@Override
-			public String run(Answer1 feature) throws Exception {
-				int result = feature.plus(i, j);
-				return String.valueOf(result);
+			public String run(Calculator feature) throws Exception {
+				return feature.execute(formula);
 			}
 		}.run();
 	}

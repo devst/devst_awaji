@@ -11,7 +11,7 @@ public class TeamTest extends UnitTest {
 
 	@Test
 	public void 該当チームの実装クラスを取得する() {
-		Class actual = Team.A.getFeature(features.Answer1.class);
+		Class actual = Team.A.getFeature(features.Calculator.class);
 		assertThat(actual, is(sameInstance(features.a.Answer1.class)));
 	}
 

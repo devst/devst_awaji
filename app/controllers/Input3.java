@@ -3,7 +3,7 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.Answer3;
+import features.FizzBuzz;
 
 public class Input3 extends Controller {
 
@@ -40,9 +40,9 @@ public class Input3 extends Controller {
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
 		final int i = Integer.valueOf(args[0]);
-		return new TeamFeatureRunner<Answer3>(Answer3.class) {
+		return new TeamFeatureRunner<FizzBuzz>(FizzBuzz.class) {
 			@Override
-			public String run(Answer3 feature) throws Exception {
+			public String run(FizzBuzz feature) throws Exception {
 				return feature.fizzBuzz(i);
 			}
 		}.run();

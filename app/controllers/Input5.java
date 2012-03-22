@@ -3,7 +3,7 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.Answer5;
+import features.RomanConverter;
 
 public class Input5 extends Controller {
 
@@ -39,10 +39,10 @@ public class Input5 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(final String... args) {
-		return new TeamFeatureRunner<Answer5>(Answer5.class) {
+		return new TeamFeatureRunner<RomanConverter>(RomanConverter.class) {
 			@Override
-			public String run(Answer5 feature) throws Exception {
-				return String.valueOf(feature.toInt(args[0]));
+			public String run(RomanConverter feature) throws Exception {
+				return String.valueOf(feature.toArabic(args[0]));
 			}
 		}.run();
 	}
