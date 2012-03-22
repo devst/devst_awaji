@@ -17,7 +17,7 @@ import org.junit.runners.model.InitializationError;
 
 import play.mvc.Controller;
 import features.Index;
-import features.Index.Entry;
+import features.Index.Feature;
 
 public class Application extends Controller {
 
@@ -35,8 +35,8 @@ public class Application extends Controller {
 		for (Team team : Team.values()) {
 			Map<String, String> scoreMap = new LinkedHashMap<String, String>();
 
-			for (Entry e : Index.getList()) {
-				String testResult = test(e.judgeman, team.getFeature(e.feature));
+			for (Feature e : Index.getList()) {
+				String testResult = test(e.judgeman, team.getFeature(e.type));
 				scoreMap.put(e.name, testResult);
 			}
 			resultMap.put(team, scoreMap);
@@ -47,7 +47,7 @@ public class Application extends Controller {
 	/**
 	 * judgemanのテストを実行する
 	 */
-	public static String test(Class<?> test, final Class<?> answer) {
+	private static String test(Class<?> test, final Class<?> answer) {
 
 		if (answer == null) {
 			return "notyet";
