@@ -12,12 +12,12 @@ public class TeamTest extends UnitTest {
 	@Test
 	public void 該当チームの実装クラスを取得する() {
 		Class actual = Team.A.getFeature(features.Calculator.class);
-		assertThat(actual, is(sameInstance(features.a.Answer1.class)));
+		assertThat(actual, is(sameInstance(features.a.Calculator.class)));
 	}
 
 	@Test
 	public void 該当チームの実装クラスを取得する2() {
-		Class actual = Team.A.getFeature(features.JapaneseSyllabary.class);
-		assertThat(actual, is(sameInstance(features.a.JapaneseSyllabary.class)));
+		Class actual = Team.A.getFeature(features.FizzBuzz.class);
+		assertThat(actual, is(sameInstance(features.a.FizzBuzz.class)));
 	}
 }
