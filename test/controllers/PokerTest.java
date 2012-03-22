@@ -7,15 +7,15 @@ import java.util.EnumMap;
 
 import org.junit.Test;
 
-public class AdderTest {
+public class PokerTest {
 
 	@Test
 	public void test() {
 		EnumMap<Team, String> expected = new EnumMap<Team, String>(Team.class);
-		expected.put(Team.A, "5");
+		expected.put(Team.A, "フラッシュ");
 		expected.put(Team.B, "");
 
-		EnumMap<Team, String> actual = Input1.execute("2", "3");
+		EnumMap<Team, String> actual = Input4.execute("D9", "D3", "DA", "D6", "DK");
 		assertThat(actual, is(expected));
 	}
 }
