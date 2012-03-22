@@ -2,8 +2,16 @@ package controllers;
 
 public enum Team {
 
-	A("えーちーむ", "features.a"),
-	B("B-TEAM", "features.b"),
+	A("Team-A", "features.a"),
+	B("Team-B", "features.b"),
+	C("3", "features.b"),
+	D("4", "features.b"),
+	E("5", "features.b"),
+	F("6", "features.b"),
+	G("7", "features.b"),
+	H("8", "features.b"),
+	I("9", "features.b"),
+	J("10", "features.b"),
 	;
 
 	private static final Class<?> DUMMY = null;

@@ -3,18 +3,16 @@
 #{set 'moreStyles'}
 <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/index.css'}">
 #{/set}
+<table align=center>
 #{list items:resultMap, as:'result'}
-<div class="teamResult">
-  <table class="scoreboard">
-  <caption>${result.key}</caption>
-  %{questionNo = 1}%
-  #{list items:result.value, as:'score'}
   <tr class="scoreboard">
-    <td class="scoreboard">Q${questionNo}</td>
-    <td class="scoreboard ${score.value}">${score.key}</td>
+    <td class="scoreboard">${result.key}</td>
+    #{list items:result.value, as:'score'}
+      <td class="scoreboard ${score.value.result}">
+        ${score.key}<br>
+        <span title="${score.value.failures?.testHeader.collect{it.replaceAll('\\(.+\\)','')}}">${score.value.progress}</span>
+      </td>
+    #{/list}
   </tr>
-  %{questionNo++}%
-  #{/list}
-  </table>
-</div>
 #{/list}
+</table>
