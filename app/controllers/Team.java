@@ -11,7 +11,7 @@ public enum Team {
 	G("7", "features.b"),
 	H("8", "features.b"),
 	I("9", "features.b"),
-	J("10", "features.b"),
+	J("かんじゃば", "features.kanjava"),
 	;
 
 	private static final Class<?> DUMMY = null;
