@@ -3,7 +3,8 @@ package controllers;
 public enum Team {
 
 	A("Team-A", "features.a"),
-	B("Team-B", "features.b"),
+	B("2", "features.b"),
+	J("かんじゃば", "features.kanjava"),
 	C("3", "features.b"),
 	D("4", "features.b"),
 	E("5", "features.b"),
@@ -11,7 +12,6 @@ public enum Team {
 	G("7", "features.b"),
 	H("8", "features.b"),
 	I("9", "features.b"),
-	J("かんじゃば", "features.kanjava"),
 	;
 
 	private static final Class<?> DUMMY = null;
