@@ -1,41 +1,35 @@
-body {
+.board {
+  border-bottom:1px dashed #000;
+}
+.board [class*="span"] {
+  text-align: center;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  min-height: 30px;
+  line-height: 30px;
+}
+.board:hover  {
+  background: #FFD;
+}
+.board {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+.bingo-ok, .bingo-ng {
+	float: left;
+	width:30px;
+	height:30px;
 	margin: 0px;
+	padding: 0;
+	border:1px solid #CCC;
 }
-h1 {
-	padding: 10px;
-	margin: 0;
-	background-color: #000;
-	color: #FFF;
-	letter-spacing: 1em;
+.bingo-ng {
+	background-color: #F00;
 }
-h2 {
-  line-height: 10px;
+.bingo-ok {
+	background-color: #0F0;
 }
 
-table {
-  border-collapse: collapse;
-  border: 1px solid gray;
-}
-
-th {
-  background-color: lime;
-}
-
-th, td {
-  border: 1px solid gray;
-}
-
-#navigationArea {
-  background-color: #CCC;
-  padding:5px;
-}
-A {
-  color: #009;
-}
-
-#messageArea {
-  margin-top: 5px;
-  height: 20px;
-  color: red;
-  overflow-y: scroll;
-}

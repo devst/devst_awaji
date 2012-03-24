@@ -1,0 +1,11 @@
+%{
+  if (_message != null && _message.length() > 0) {
+}%
+<div class="alert alert-block alert-error">
+  <a class="close" data-dismiss="alert">×</a>
+  <h4 class="alert-heading">ERROR!</h4>
+  ${_message}
+</div>
+%{
+  }
+}%

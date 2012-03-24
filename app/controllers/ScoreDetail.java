@@ -26,6 +26,6 @@ public class ScoreDetail {
 	}
 
 	public String getProgress() {
-		return hasInstance && failure > 0 ? String.format("(%d / %d)", getSuccess(), total) : "";
+		return hasInstance && failure > 0 ? String.format("%d / %d", getSuccess(), total) : "success";
 	}
 }

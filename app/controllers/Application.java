@@ -1,9 +1,11 @@
 package controllers;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import play.mvc.Controller;
+import features.Index;
 import features.Index.Feature;
 
 public class Application extends Controller {
@@ -13,7 +15,8 @@ public class Application extends Controller {
 	 */
 	public static void index() {
 		Map<Team, Map<Feature, ScoreDetail>> resultMap = createResultMap();
-		render(resultMap);
+		Object features = Index.getList();
+		render(resultMap, features);
 	}
 
 	protected static Map<Team, Map<Feature, ScoreDetail>> createResultMap() {

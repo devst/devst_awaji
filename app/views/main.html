@@ -5,30 +5,36 @@
         <title>XP Workshop - #{get 'title' /}</title>
         <meta charset="${_response_encoding}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.min.css'}">
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </head>
-    <body>
-        <h1>#{get 'title' /}</h1>
-        <div id="navigationArea">
-          <a href="@{Application.index()}">スコアボード</a>
-          <a href="@{Input1.show()}">Q1</a>
-          <a href="@{Input2.show()}">Q2</a>
-          <a href="@{Input3.show()}">Q3</a>
-          <a href="@{Input4.show()}">Q4</a>
-          <a href="@{Input5.show()}">Q5</a>
+    <body style="padding-top:50px">
+
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="brand" href="#">#{get 'title' /}</a>
+                    <ul class="nav">
+                        <li><a href="@{Application.index()}">スコアボード</a></li>
+                        <li><a href="@{Input1.show()}">Q1</a></li>
+                        <li><a href="@{Input2.show()}">Q2</a></li>
+                        <li><a href="@{Input3.show()}">Q3</a></li>
+                        <li><a href="@{Input4.show()}">Q4</a></li>
+                        <li><a href="@{Input5.show()}">Q5</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div id="messageArea">
-          %{
-              if (message != null && message.length() > 0) {
-          }%
-                  [ERROR] ${message}
-          %{
-              }
-          }%
+
+        <div class="container-fluid">
+          #{alert message:message /}
+          #{doLayout /}
         </div>
-        #{doLayout /}
+
+        #{script 'jquery-1.7.2.min.js' /}
+        #{script 'bootstrap.min.js' /}
+        #{script 'bootstrap-tab.js' /}
     </body>
 </html>

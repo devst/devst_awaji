@@ -1,4 +1,4 @@
-#{extends 'main.html' /}
+#{extends './input.html' /}
 #{set title:'Q3 FizzBuzz' /}
 <form action="@{Input3.perform()}">
 <h2>説明</h2>
@@ -8,13 +8,8 @@
 </div>
 <h2>入力</h2>
 <div id="inputArea">
-  <input type="text" name="param1"  value="${param1}" /><br>
-  <input type="submit" id="btnExecute"  value="実行" /><br>
+  <input type="text" name="param1" value="${param1}" /><br>
+  <button class="btn btn-large"><i class="icon-play"></i> 実行</button>
 </div>
-<h2>実行結果</h2>
-<div id="resultArea">
-#{list items:resultMap, as:'result' }
-  ${result.key} ${result.value}<br>
-#{/list}
-</div>
+
 </form>
