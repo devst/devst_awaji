@@ -43,7 +43,7 @@ public class DevstTag extends FastTags {
 			sb.append(name.substring(0, name.lastIndexOf('(')));
 			sb.append("</li>");
 		}
-		sb.append("</li>");
+		sb.append("</ul>");
 		return sb.toString();
 	}
 
