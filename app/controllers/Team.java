@@ -6,7 +6,7 @@ public enum Team {
 	B("2", "features.b"),
 	J("かんじゃば", "features.kanjava"),
 	C("きりんさん", "features.giraffe"),
-	D("4", "features.b"),
+	D("ぞーうさん、ぞーうさん、なーまえがながいのね", "features.elephant"),
 	E("5", "features.b"),
 	F("6", "features.b"),
 	G("7", "features.b"),
