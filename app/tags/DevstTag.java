@@ -6,8 +6,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.runner.notification.Failure;
-
 import play.templates.FastTags;
 import play.templates.GroovyTemplate.ExecutableTemplate;
 import controllers.ScoreDetail;
@@ -21,7 +19,7 @@ public class DevstTag extends FastTags {
 			if (detail.hasInstance) {
 				String result = detail.getResult();
 				String content = getContent(detail);
-				out.printf("<span class='badge badge-%s' rel='popover' data-original-title='%s' data-content='%s'>",
+				out.printf("<span class='badge badge-%s' rel='popover' data-original-title='%s' data-content=\"%s\">",
 						result, result, content);
 				out.print(detail.getProgress());
 				out.print("</span>");
@@ -32,15 +30,19 @@ public class DevstTag extends FastTags {
 	}
 
 	private static String getContent(ScoreDetail detail) {
+		StringBuilder sb = new StringBuilder();
+
 		if (detail.failure == 0) {
-			return "Congratulations!";
+			sb.append("Congratulations!<br/><br/>");
 		}
 
-		StringBuilder sb = new StringBuilder("<ul>");
-		for (Failure fail : detail.failures) {
-			String name = fail.getTestHeader();
+		sb.append("<ul class='test-headers'>");
+		int i = 0;
+		for (String testHeader : detail.testHeaders) {
 			sb.append("<li>");
-			sb.append(name.substring(0, name.lastIndexOf('(')));
+			sb.append(detail.isSuccess.get(i) ? "<i class='icon-check'></i> "
+					: "<i class='icon-fire'></i> ");
+			sb.append(testHeader);
 			sb.append("</li>");
 		}
 		sb.append("</ul>");

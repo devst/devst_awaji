@@ -13,6 +13,8 @@ public class ScoreDetail {
 	public int total;
 	public int failure;
 	public List<Failure> failures;
+	public List<String> testHeaders;
+	public List<Boolean> isSuccess;
 
 	public int getSuccess() {
 		return total - failure;
