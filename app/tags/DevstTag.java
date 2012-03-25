@@ -44,6 +44,7 @@ public class DevstTag extends FastTags {
 					: "<i class='icon-fire'></i> ");
 			sb.append(testHeader);
 			sb.append("</li>");
+			i++;
 		}
 		sb.append("</ul>");
 		return sb.toString();
