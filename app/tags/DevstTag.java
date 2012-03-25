@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.runner.notification.Failure;
+
 import play.templates.FastTags;
 import play.templates.GroovyTemplate.ExecutableTemplate;
 import controllers.ScoreDetail;
@@ -17,12 +19,32 @@ public class DevstTag extends FastTags {
 		if (args.get("name") != null) {
 			ScoreDetail detail = (ScoreDetail) args.get("name");
 			if (detail.hasInstance) {
-				out.printf("<span class='badge badge-%s'>%s</span>", detail.getResult(), detail.getProgress());
-				// out.print("<div class='progress progress-striped active'><div class='bar' style='width: 40%'></div></div>");
+				String result = detail.getResult();
+				String content = getContent(detail);
+				out.printf("<span class='badge badge-%s' rel='popover' data-original-title='%s' data-content='%s'>",
+						result, result, content);
+				out.print(detail.getProgress());
+				out.print("</span>");
 			} else {
 				out.printf("<span class='badge'>none</span>");
 			}
 		}
+	}
+
+	private static String getContent(ScoreDetail detail) {
+		if (detail.failure == 0) {
+			return "Congratulations!";
+		}
+
+		StringBuilder sb = new StringBuilder("<ul>");
+		for (Failure fail : detail.failures) {
+			String name = fail.getTestHeader();
+			sb.append("<li>");
+			sb.append(name.substring(0, name.lastIndexOf('(')));
+			sb.append("</li>");
+		}
+		sb.append("</li>");
+		return sb.toString();
 	}
 
 	public static void _bingo(Map<?, ?> args, Closure body, PrintWriter out, ExecutableTemplate template, int fromLine) {
