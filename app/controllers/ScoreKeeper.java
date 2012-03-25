@@ -10,16 +10,16 @@ import org.junit.runner.Result;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
-import features.Index;
-import features.Index.Feature;
+import features.Feature;
+
 
 public class ScoreKeeper {
 
 	public static Map<Feature, ScoreDetail> getTeamScore(Team team) {
 		Map<Feature, ScoreDetail> scoreMap = new LinkedHashMap<Feature, ScoreDetail>();
 	
-		for (Feature feature : Index.getList()) {
-			ScoreDetail testResult = test(feature.judgeman, team.getFeature(feature.type));
+		for (Feature feature : Feature.values()) {
+			ScoreDetail testResult = test(feature.judge, team.getFeature(feature.feature));
 			scoreMap.put(feature, testResult);
 		}
 		return scoreMap;
