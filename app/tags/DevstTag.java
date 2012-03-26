@@ -64,15 +64,17 @@ public class DevstTag extends FastTags {
 
 		Map<Integer, BingoCell> map = new HashMap<Integer, BingoCell>();
 		int i = 0;
-		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q1))));
-		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q2))));
-		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q3))));
-		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q4))));
-		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q5))));
-		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q6))));
-		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q7))));
-		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.Q1))));
-		map.put(i++, new BingoCell(Condition.successCount(result.get(Feature.Q6), 1)));
+		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.TSURU_KAME))));
+		map.put(i++, new BingoCell(Condition.successCount(result.get(Feature.TSURU_KAME), 6)));
+		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.CALC))));
+
+		map.put(i++, new BingoCell(Condition.successCount(result.get(Feature.MYERS), 3)));
+		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.ENQ))));
+		map.put(i++, new BingoCell(Condition.successCount(result.get(Feature.CALC), 6)));
+
+		map.put(i++, new BingoCell(Condition.successCount(result.get(Feature.FIZZ_BUZZ), 4)));
+		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.FIZZ_BUZZ))));
+		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.MYERS))));
 
 		int num = boardSize;
 		for (int row = 0; row < num; row++) {
