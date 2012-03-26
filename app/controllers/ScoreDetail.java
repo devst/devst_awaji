@@ -30,4 +30,12 @@ public class ScoreDetail {
 	public String getProgress() {
 		return hasInstance && failure > 0 ? String.format("%d / %d", getSuccess(), total) : "success";
 	}
+
+	public static ScoreDetail instance(int total, int failure, List<Failure> failures) {
+		ScoreDetail detail = new ScoreDetail(true);
+		detail.total = total;
+		detail.failure = failure;
+		detail.failures = failures;
+		return detail;
+	}
 }

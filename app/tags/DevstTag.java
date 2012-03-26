@@ -1,14 +1,20 @@
 package tags;
 
+import features.Feature;
 import groovy.lang.Closure;
+
+import internal.BingoCell;
+import internal.Condition;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import play.templates.FastTags;
 import play.templates.GroovyTemplate.ExecutableTemplate;
 import controllers.ScoreDetail;
+import controllers.Team;
 
 @FastTags.Namespace("devst")
 public class DevstTag extends FastTags {
@@ -52,27 +58,27 @@ public class DevstTag extends FastTags {
 
 	public static void _bingo(Map<?, ?> args, Closure body, PrintWriter out, ExecutableTemplate template, int fromLine) {
 
-		// Entry<Team, Map<Feature<?>, ScoreDetail>> result = (Entry<Team,
-		// Map<Feature<?>, ScoreDetail>>) args
-		// .get("result");
+		Map<Feature, ScoreDetail> result = ((Map<Feature, ScoreDetail>) args.get("result"));
 
-		Map<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+		;
+
+		Map<Integer, BingoCell> map = new HashMap<Integer, BingoCell>();
 		int i = 0;
-		map.put(i++, true);
-		map.put(i++, false);
-		map.put(i++, true);
-		map.put(i++, false);
-		map.put(i++, true);
-		map.put(i++, false);
-		map.put(i++, false);
-		map.put(i++, true);
-		map.put(i++, true);
+		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q1))));
+		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q2))));
+		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q3))));
+		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q4))));
+		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q5))));
+		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q6))));
+		map.put(i++, new BingoCell(Condition.instance(result.get(Feature.Q7))));
+		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.Q1))));
+		map.put(i++, new BingoCell(Condition.successCount(result.get(Feature.Q6), 1)));
 
 		int num = boardSize;
 		for (int row = 0; row < num; row++) {
 			out.println("<div class='row'>");
 			for (int column = 0; column < num; column++) {
-				out.printf("<div class='bingo-%s'></div>", map.get(row * num + column) ? "ok" : "ng");
+				out.printf("<div class='bingo-%s'></div>", map.get(row * num + column).judge() ? "ok" : "ng");
 			}
 			out.println("</div>");
 		}
