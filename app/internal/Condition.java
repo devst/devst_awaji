@@ -10,6 +10,7 @@ public abstract class Condition {
 		return new Condition() {
 			@Override
 			public boolean getStatus() {
+				if (detail == null) return false;
 				return detail.hasInstance;
 			}
 		};
@@ -19,6 +20,7 @@ public abstract class Condition {
 		return new Condition() {
 			@Override
 			public boolean getStatus() {
+				if (detail == null) return false;
 				return detail.hasInstance && detail.total > 0 && detail.failure == 0;
 			}
 		};
@@ -28,6 +30,7 @@ public abstract class Condition {
 		return new Condition() {
 			@Override
 			public boolean getStatus() {
+				if (detail == null) return false;
 				return detail.hasInstance && detail.getSuccess() >= count;
 			}
 		};

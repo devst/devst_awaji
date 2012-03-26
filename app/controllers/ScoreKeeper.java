@@ -21,7 +21,7 @@ public class ScoreKeeper {
 	public static Map<Feature, ScoreDetail> getTeamScore(Team team) {
 		Map<Feature, ScoreDetail> scoreMap = new LinkedHashMap<Feature, ScoreDetail>();
 	
-		for (Feature feature : Feature.values()) {
+		for (Feature feature : Feature.getVisibleList()) {
 			ScoreDetail testResult = test(feature.judge, team.getFeature(feature.feature));
 			scoreMap.put(feature, testResult);
 		}

@@ -1,6 +1,9 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import play.mvc.Controller;
@@ -13,7 +16,8 @@ public class Application extends Controller {
 	 */
 	public static void index() {
 		Map<Team, Map<Feature, ScoreDetail>> resultMap = createResultMap();
-		render(resultMap);
+		List<Feature> features = Feature.getVisibleList();
+		render(resultMap, features);
 	}
 
 	protected static Map<Team, Map<Feature, ScoreDetail>> createResultMap() {

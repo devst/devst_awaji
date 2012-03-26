@@ -12,10 +12,11 @@
 
 <div class="row-fluid board">
   <div class="span2">チーム名</div>
-  #{list items:features.Feature.values(), as:'feature'}
+  #{list items:features, as:'feature'}
     <div class='span1'>${feature}</div>
   #{/list}
 </div>
+
 #{list items:resultMap, as:'result'}
   <div class="row-fluid board">
     <div class="span2">${result.key}</div>
