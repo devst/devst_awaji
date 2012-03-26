@@ -2,16 +2,21 @@ package controllers;
 
 public enum Team {
 
-	A("Team-A", "features.a"),
-	B("2", "features.b"),
-	J("かんじゃば", "features.kanjava"),
+	A("さるさん", "features.a"),
+	B("かめさん", "features.b"),
+	J("うさぎさん", "features.kanjava"),
 	C("きりんさん", "features.giraffe"),
-	D("ぞーうさん、ぞーうさん、なーまえがながいのね", "features.elephant"),
-	E("5", "features.b"),
-	F("6", "features.b"),
-	G("7", "features.b"),
-	H("8", "features.b"),
-	I("9", "features.b"),
+	D("ぞうさん", "features.elephant"),
+	E("らいおんさん", "features.b"),
+	F("とらさん", "features.b"),
+	G("ひつじさん", "features.b"),
+	H("いぬさん", "features.b"),
+	I("ねずみさん", "features.b"),
+	K("うしさん", "features.b"),
+	L("へびさん", "features.b"),
+	M("うまさん", "features.b"),
+	N("とりさん", "features.b"),
+	O("いのししさん", "features.b"),
 	;
 
 	private static final Class<?> DUMMY = null;
