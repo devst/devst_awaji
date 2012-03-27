@@ -3,11 +3,10 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.JapaneseSyllabary;
 
-public class Input2 extends Controller {
+public class Calculator extends Controller {
 
-	private static final String TEMPLATE = "Input/input2.html";
+	private static final String TEMPLATE = "Input/calculator.html";
 
 	/**
 	 * 初期表示
@@ -39,12 +38,12 @@ public class Input2 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
-		final char[] param = args[0].toCharArray();
+		final String formula = args[0];
 
-		return new TeamFeatureRunner<JapaneseSyllabary>(JapaneseSyllabary.class) {
+		return new TeamFeatureRunner<features.Calculator>(features.Calculator.class) {
 			@Override
-			public String run(JapaneseSyllabary feature) throws Exception {
-				return feature.execute(param);
+			public String run(features.Calculator feature) throws Exception {
+				return feature.execute(formula);
 			}
 		}.run();
 	}

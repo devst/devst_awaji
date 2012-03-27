@@ -3,11 +3,10 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.RomanConverter;
 
-public class Input5 extends Controller {
+public class JapaneseSyllabary extends Controller {
 
-	private static final String TEMPLATE = "Input/input5.html";
+	private static final String TEMPLATE = "Input/japanesesyllabary.html";
 
 	/**
 	 * 初期表示
@@ -38,11 +37,15 @@ public class Input5 extends Controller {
 	 * @param args パラメータ
 	 * @return 各チームの出力を値とするEnumMap
 	 */
-	protected static EnumMap<Team, String> execute(final String... args) {
-		return new TeamFeatureRunner<RomanConverter>(RomanConverter.class) {
+	protected static EnumMap<Team, String> execute(String... args) {
+		final char[] param = args[0].toCharArray();
+
+		return new TeamFeatureRunner<features.JapaneseSyllabary>(
+				features.JapaneseSyllabary.class) {
 			@Override
-			public String run(RomanConverter feature) throws Exception {
-				return String.valueOf(feature.toArabic(args[0]));
+			public String run(features.JapaneseSyllabary feature)
+					throws Exception {
+				return feature.execute(param);
 			}
 		}.run();
 	}

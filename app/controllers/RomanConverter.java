@@ -3,11 +3,10 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.FizzBuzz;
 
-public class Input3 extends Controller {
+public class RomanConverter extends Controller {
 
-	private static final String TEMPLATE = "Input/input3.html";
+	private static final String TEMPLATE = "Input/romanconverter.html";
 
 	/**
 	 * 初期表示
@@ -38,12 +37,12 @@ public class Input3 extends Controller {
 	 * @param args パラメータ
 	 * @return 各チームの出力を値とするEnumMap
 	 */
-	protected static EnumMap<Team, String> execute(String... args) {
-		final int i = Integer.valueOf(args[0]);
-		return new TeamFeatureRunner<FizzBuzz>(FizzBuzz.class) {
+	protected static EnumMap<Team, String> execute(final String... args) {
+		return new TeamFeatureRunner<features.RomanConverter>(
+				features.RomanConverter.class) {
 			@Override
-			public String run(FizzBuzz feature) throws Exception {
-				return feature.fizzBuzz(i);
+			public String run(features.RomanConverter feature) throws Exception {
+				return String.valueOf(feature.toArabic(args[0]));
 			}
 		}.run();
 	}

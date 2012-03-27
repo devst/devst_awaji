@@ -3,11 +3,10 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.Poker;
 
-public class Input4 extends Controller {
+public class Poker extends Controller {
 
-	private static final String TEMPLATE = "Input/input4.html";
+	private static final String TEMPLATE = "Input/poker.html";
 
 	/**
 	 * 初期表示
@@ -43,9 +42,9 @@ public class Input4 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(final String... args) {
-		return new TeamFeatureRunner<Poker>(Poker.class) {
+		return new TeamFeatureRunner<features.Poker>(features.Poker.class) {
 			@Override
-			public String run(Poker feature) throws Exception {
+			public String run(features.Poker feature) throws Exception {
 				return feature.poker(args);
 			}
 		}.run();

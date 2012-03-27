@@ -3,11 +3,10 @@ package controllers;
 import java.util.EnumMap;
 
 import play.mvc.Controller;
-import features.Calculator;
 
-public class Input1 extends Controller {
+public class FizzBuzz extends Controller {
 
-	private static final String TEMPLATE = "Input/input1.html";
+	private static final String TEMPLATE = "Input/fizzbuzz.html";
 
 	/**
 	 * 初期表示
@@ -39,12 +38,11 @@ public class Input1 extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
-		final String formula = args[0];
-
-		return new TeamFeatureRunner<Calculator>(Calculator.class) {
+		final int i = Integer.valueOf(args[0]);
+		return new TeamFeatureRunner<features.FizzBuzz>(features.FizzBuzz.class) {
 			@Override
-			public String run(Calculator feature) throws Exception {
-				return feature.execute(formula);
+			public String run(features.FizzBuzz feature) throws Exception {
+				return feature.fizzBuzz(i);
 			}
 		}.run();
 	}
