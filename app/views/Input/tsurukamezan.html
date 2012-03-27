@@ -1,0 +1,16 @@
+#{extends './input.html' /}
+#{set title:'鶴亀算' /}
+<form action="@{Tsurukamezan.perform()}">
+<h2>説明</h2>
+<div id="explanationArea">
+<p>鶴と亀の全個体数と、両者の足の本数をそれぞれ正の整数で渡し、鶴と亀それぞれの個体数を文字列として返す。</p>
+<p>鶴の足は2脚、亀は4脚とし、答えは「鶴x羽、亀y匹」(x, yはそれぞれの個体数)とする。</p>
+</div>
+<h2>入力</h2>
+<div id="inputArea">
+全個体数 <input type="text" name="param1" value="${param1}" /><br>
+足の本数 <input type="text" name="param2" value="${param2}" /><br>
+<button class="btn btn-large"><i class="icon-play"></i> 実行</button>
+</div>
+
+</form>
