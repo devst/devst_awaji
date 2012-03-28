@@ -1,6 +1,7 @@
 #{extends 'main.html' /}
 #{doLayout /}
 
+#{if (resultMap != null && !resultMap.isEmpty())}
 <h2>実行結果</h2>
 <div id="resultArea">
 <table class="table table-striped">
@@ -8,9 +9,10 @@
     <tr><th>team</th><th>result</th></tr>
   </thead>
   <tbody>
-    #{list items:resultMap, as:'result' }
-    <tr><td>${result.key}</td><td>${result.value}</td></tr>
+    #{list resultMap}
+    <tr><td>${_.key}</td><td>${_.value}</td></tr>
     #{/list}
   </tbody>
 </table>
 </div>
+#{/if}
