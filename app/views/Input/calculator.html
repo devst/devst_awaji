@@ -1,15 +1,10 @@
-#{extends 'main.html' /}
+#{extends './input.html' /}
 #{set title:'計算機' /}
+
 <form action="@{Calculator.perform()}">
-<div id="inputArea">
 <h2>入力</h2>
-  <input type="text" name="param1"  value="${param1}" /><br>
-  <input type="submit" id="btnExecute"  value="実行" /><br>
-</div>
-<div id="resultArea">
-<h2>実行結果</h2>
-#{list items:resultMap, as:'result' }
-  ${result.key} ${result.value}<br>
-#{/list}
+<div id="inputArea">
+<input type="text" name="param1"  value="${param1}" /><br>
+<input type="submit" id="btnExecute"  value="実行" /><br>
 </div>
 </form>

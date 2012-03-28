@@ -1,5 +1,6 @@
 #{extends './input.html' /}
 #{set title:'鶴亀算' /}
+
 <form action="@{Tsurukamezan.perform()}">
 <h2>説明</h2>
 <div id="explanationArea">
@@ -12,5 +13,4 @@
 足の本数 <input type="text" name="param2" value="${param2}" /><br>
 <button class="btn btn-large"><i class="icon-play"></i> 実行</button>
 </div>
-
 </form>

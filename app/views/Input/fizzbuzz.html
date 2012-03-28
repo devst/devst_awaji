@@ -1,5 +1,6 @@
 #{extends './input.html' /}
 #{set title:'FizzBuzz' /}
+
 <form action="@{FizzBuzz.perform()}">
 <h2>説明</h2>
 <div id="explanationArea">
@@ -8,8 +9,7 @@
 </div>
 <h2>入力</h2>
 <div id="inputArea">
-  <input type="text" name="param1" value="${param1}" /><br>
-  <button class="btn btn-large"><i class="icon-play"></i> 実行</button>
+<input type="text" name="param1" value="${param1}" /><br>
+<button class="btn btn-large"><i class="icon-play"></i> 実行</button>
 </div>
-
 </form>
