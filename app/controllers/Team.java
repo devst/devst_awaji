@@ -2,31 +2,26 @@ package controllers;
 
 public enum Team {
 
-	A("さるさん", "features.monkey"),
-	B("かめさん", "features.turtle"),
-	J("うさぎさん", "features.rabbit"),
-	C("きりんさん", "features.giraffe"),
-	D("ぞうさん", "features.elephant"),
-	E("ぺんぎんさん", "features.penguin"),
-	F("とらさん", "features.tiger"),
-	G("ひつじさん", "features.sheep"),
-	H("いぬさん", "features.dog"),
-	I("ねずみさん", "features.mouse"),
-	K("うしさん", "features.cow"),
-	L("へびさん", "features.snake"),
-	M("うまさん", "features.horse"),
-	N("とりさん", "features.bird"),
-	O("いのししさん", "features.wildboar"),
-	;
-
-	private static final Class<?> DUMMY = null;
+	MONKEY("さるさん"),
+	TURTLE("かめさん"),
+	RABBIT("うさぎさん"),
+	GIRAFFE("きりんさん"),
+	ELEPHANT("ぞうさん"),
+	PENGUIN("ぺんぎんさん"),
+	TIGER("とらさん"),
+	SHEEP("ひつじさん"),
+	DOG("いぬさん"),
+	MOUSE("ねずみさん"),
+	COW("うしさん"),
+	SNAKE("へびさん"),
+	HORSE("うまさん"),
+	BIRD("とりさん"),
+	WILDBOAR("いのししさん"), ;
 
 	final String teamName;
-	final String pkg;
 
-	Team(String teamName, String pkg) {
+	Team(String teamName) {
 		this.teamName = teamName;
-		this.pkg = pkg;
 	}
 
 	@Override
@@ -36,14 +31,15 @@ public enum Team {
 
 	/**
 	 * Featureのインタフェースに対応した、チーム毎の実装クラスを返します。
-	 * @param featureInterface Featureインタフェースの型
+	 * @param clz Featureインタフェースの型
 	 * @return 実装クラスの型
 	 */
-	public <T> Class<T> getFeature(Class<T> featureInterface) {
+	public <T> Class<T> getFeature(Class<T> clz) {
 		try {
-			return (Class<T>) Class.forName(this.pkg + "." + featureInterface.getSimpleName());
+			String className = "features." + name().toLowerCase() + "." + clz.getSimpleName();
+			return (Class<T>) Class.forName(className);
 		} catch (ClassNotFoundException e) {
-			return (Class<T>) DUMMY;
+			return null;
 		}
 	}
 }
