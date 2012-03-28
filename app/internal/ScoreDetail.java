@@ -9,6 +9,7 @@ public class ScoreDetail {
 	public ScoreDetail(boolean hasInstance) {
 		this.hasInstance = hasInstance;
 	}
+
 	public final boolean hasInstance;
 	public int total;
 	public int failure;
@@ -22,11 +23,14 @@ public class ScoreDetail {
 		if (!hasInstance) {
 			return "notyet";
 		}
-		return failure == 0 ? "success": "error";
+		return failure == 0 ? "success" : "error";
 	}
 
 	public String getProgress() {
-		return hasInstance && failure > 0 ? String.format("%d / %d", getSuccess(), total) : "success";
+		if (!hasInstance) {
+			return "none";
+		}
+		return failure > 0 ? String.format("%d / %d", getSuccess(), total) : "success";
 	}
 
 	public static ScoreDetail instance(int total, int failure, List<Failure> failures) {
