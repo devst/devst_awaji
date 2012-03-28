@@ -35,13 +35,12 @@ public abstract class TeamFeatureRunner<T> {
 			String result;
 			Class<T> featureClass = team.getFeature(featureInterface);
 			if (featureClass == null) {
-				result = "";
-			} else {
-				try {
-					result = run(featureClass);
-				} catch (Exception e) {
-					result = e.toString();
-				}
+				continue;
+			}
+			try {
+				result = run(featureClass);
+			} catch (Exception e) {
+				result = e.toString();
 			}
 			resultMap.put(team, result);
 		}
