@@ -1,5 +1,8 @@
 package controllers;
 
+import internal.ScoreDetail;
+import internal.ScoreKeeper;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumMap;

@@ -5,6 +5,7 @@ import groovy.lang.Closure;
 
 import internal.BingoCell;
 import internal.Condition;
+import internal.ScoreDetail;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -15,7 +16,6 @@ import org.junit.runner.notification.Failure;
 
 import play.templates.FastTags;
 import play.templates.GroovyTemplate.ExecutableTemplate;
-import controllers.ScoreDetail;
 import controllers.Team;
 
 @FastTags.Namespace("devst")

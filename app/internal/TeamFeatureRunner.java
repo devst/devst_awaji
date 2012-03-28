@@ -1,12 +1,14 @@
-package controllers;
+package internal;
 
 import java.util.EnumMap;
+
+import controllers.Team;
 
 /**
  * 全チームのfeatureを実行する抽象クラス。
  * @param <T> 実行するfeature
  */
-abstract class TeamFeatureRunner<T> {
+public abstract class TeamFeatureRunner<T> {
 
 	/**
 	 * インタフェースの型
@@ -17,7 +19,7 @@ abstract class TeamFeatureRunner<T> {
 	 * コンストラクタ
 	 * @param featureInterface インタフェースの型
 	 */
-	TeamFeatureRunner(Class<T> featureInterface) {
+	public TeamFeatureRunner(Class<T> featureInterface) {
 		this.featureInterface = featureInterface;
 	}
 
@@ -26,7 +28,7 @@ abstract class TeamFeatureRunner<T> {
 	 * @param params パラメータ
 	 * @return 各チームの出力を値とするEnumMap
 	 */
-	EnumMap<Team, String> run() {
+	public EnumMap<Team, String> run() {
 		EnumMap<Team, String> resultMap = new EnumMap<Team, String>(Team.class);
 
 		for (Team team : Team.values()) {

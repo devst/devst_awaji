@@ -1,4 +1,4 @@
-package controllers;
+package internal;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,6 +9,8 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
+
+import controllers.Team;
 
 import features.Feature;
 

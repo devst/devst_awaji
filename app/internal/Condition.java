@@ -1,6 +1,5 @@
 package internal;
 
-import controllers.ScoreDetail;
 
 public abstract class Condition {
 

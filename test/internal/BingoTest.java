@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 
-import controllers.ScoreDetail;
 
 public class BingoTest {
 

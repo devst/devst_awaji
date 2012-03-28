@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import controllers.ScoreDetail;
 
 public class BingoCellTest {
 
