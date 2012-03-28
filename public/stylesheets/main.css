@@ -17,19 +17,14 @@
   margin-bottom: 0;
 }
 
+.badge {
+  font-size: 15px !important;
+}
 
-.bingo-ok, .bingo-ng {
+.bingo {
 	float: left;
-	width:30px;
+	width:20px;
 	height:30px;
-	margin: 0px;
-	padding: 0;
 	border:1px solid #CCC;
-}
-.bingo-ng {
-	background-color: #F00;
-}
-.bingo-ok {
-	background-color: #0F0;
 }
 

@@ -1,43 +1,42 @@
 package internal;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.runner.notification.Failure;
 
 public class ScoreDetail {
 
-	public ScoreDetail(boolean hasInstance) {
-		this.hasInstance = hasInstance;
+	public static final ScoreDetail NONE = new ScoreDetail(0, 0, null);
+
+	private ScoreDetail(int total, int failure, List<Failure> failures) {
+		this.total = total;
+		this.failure = failure;
+		this.failures = failures;
 	}
 
-	public final boolean hasInstance;
-	public int total;
-	public int failure;
-	public List<Failure> failures;
+	private final int total;
+	private final int failure;
+	private final List<Failure> failures;
 
-	public int getSuccess() {
-		return total - failure;
+	public int getFailure() {
+		return failure;
 	}
 
-	public String getResult() {
-		if (!hasInstance) {
-			return "notyet";
-		}
-		return failure == 0 ? "success" : "error";
+	public List<Failure> getFailures() {
+		return Collections.unmodifiableList(failures);
 	}
 
-	public String getProgress() {
-		if (!hasInstance) {
-			return "none";
-		}
-		return failure > 0 ? String.format("%d / %d", getSuccess(), total) : "success";
+	public int getTotal() {
+		return total;
+	}
+
+	public boolean isSuccess() {
+		return total > 0 && failure == 0;
 	}
 
 	public static ScoreDetail instance(int total, int failure, List<Failure> failures) {
-		ScoreDetail detail = new ScoreDetail(true);
-		detail.total = total;
-		detail.failure = failure;
-		detail.failures = failures;
-		return detail;
+		return new ScoreDetail(total, failure, failures);
 	}
+
 }

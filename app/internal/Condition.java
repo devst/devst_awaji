@@ -9,8 +9,7 @@ public abstract class Condition {
 		return new Condition() {
 			@Override
 			public boolean getStatus() {
-				if (detail == null) return false;
-				return detail.hasInstance;
+				return detail != ScoreDetail.NONE;
 			}
 		};
 	}
@@ -19,8 +18,7 @@ public abstract class Condition {
 		return new Condition() {
 			@Override
 			public boolean getStatus() {
-				if (detail == null) return false;
-				return detail.hasInstance && detail.total > 0 && detail.failure == 0;
+				return detail.isSuccess();
 			}
 		};
 	}
@@ -29,8 +27,7 @@ public abstract class Condition {
 		return new Condition() {
 			@Override
 			public boolean getStatus() {
-				if (detail == null) return false;
-				return detail.hasInstance && detail.getSuccess() >= count;
+				return detail.getTotal() - detail.getFailure() >= count;
 			}
 		};
 	}

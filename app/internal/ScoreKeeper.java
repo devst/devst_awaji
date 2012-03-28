@@ -14,12 +14,11 @@ import controllers.Team;
 
 import features.Feature;
 
-
 public class ScoreKeeper {
 
 	public static Map<Feature, ScoreDetail> getTeamScore(Team team) {
 		Map<Feature, ScoreDetail> scoreMap = new LinkedHashMap<Feature, ScoreDetail>();
-	
+
 		for (Feature feature : Feature.getVisibleList()) {
 			ScoreDetail testResult = test(feature.judge, team.getFeature(feature.feature));
 			scoreMap.put(feature, testResult);
@@ -33,11 +32,9 @@ public class ScoreKeeper {
 	private static ScoreDetail test(Class<?> test, final Class<?> answer) {
 
 		if (answer == null) {
-			ScoreDetail result = new ScoreDetail(false);
-			return result;
+			return ScoreDetail.NONE;
 		}
 
-		ScoreDetail detail = new ScoreDetail(true);
 		try {
 			Result result = new JUnitCore().run(new BlockJUnit4ClassRunner(test) {
 				@Override
@@ -47,13 +44,11 @@ public class ScoreKeeper {
 					return obj;
 				}
 			});
-			
-			detail.total = result.getRunCount();
-			detail.failure = result.getFailureCount();
-			detail.failures = result.getFailures();
+
+			return ScoreDetail.instance(result.getRunCount(), result.getFailureCount(), result.getFailures());
 		} catch (InitializationError e) {
 			e.printStackTrace();
 		}
-		return detail;
+		return ScoreDetail.NONE;
 	}
 }

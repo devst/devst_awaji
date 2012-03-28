@@ -31,12 +31,13 @@
     <div class="tab-pane" id="bingo">
 
 #{list items:resultMap, as:'result'}
-    <div class="span3">${result.key}
-    <div class="row">
-        <div class="span3">
+    <div class="span2">
+      ${result.key}
+      <div class="row">
+        <div class="span2">
             #{devst.bingo result:result.value /}
         </div>
-    </div>
+      </div>
     </div>
 #{/list}
 

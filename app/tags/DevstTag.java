@@ -28,22 +28,25 @@ public class DevstTag extends FastTags {
 		}
 		String popover = "";
 		String style = "badge";
-		if (detail.hasInstance) {
-			style += " badge-" + detail.getResult();
+		String label = "none";
+		if (detail != ScoreDetail.NONE) {
+			String result = detail.isSuccess() ? "success" : "error";
+			style += " badge-" + result;
 			popover = "rel='popover'";
-			popover += String.format(" data-original-title='%s'", detail.getResult());
+			popover += String.format(" data-original-title='%s'", result);
 			popover += String.format(" data-content='%s'", getContent(detail));
+			label = detail.isSuccess() ? "ok" : Integer.toString(detail.getFailure());
 		}
-		out.printf("<span class='%s'%s>%s</span>", style, popover, detail.getProgress());
+		out.printf("<span class='%s'%s>%s</span>", style, popover, label);
 	}
 
 	private static String getContent(ScoreDetail detail) {
-		if (detail.failure == 0) {
+		if (detail.isSuccess()) {
 			return "Congratulations!";
 		}
 
 		StringBuilder sb = new StringBuilder("<ul>");
-		for (Failure fail : detail.failures) {
+		for (Failure fail : detail.getFailures()) {
 			String name = fail.getTestHeader();
 			sb.append("<li>");
 			sb.append(name.substring(0, name.lastIndexOf('(')));
@@ -58,7 +61,7 @@ public class DevstTag extends FastTags {
 		Map<Feature, ScoreDetail> result = ((Map<Feature, ScoreDetail>) args.get("result"));
 
 		Map<Integer, BingoCell> map = new HashMap<Integer, BingoCell>();
-		int i = 0;
+		int i = 1;
 		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.TSURU_KAME))));
 		map.put(i++, new BingoCell(Condition.successCount(result.get(Feature.TSURU_KAME), 6)));
 		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.CALC))));
@@ -72,10 +75,12 @@ public class DevstTag extends FastTags {
 		map.put(i++, new BingoCell(Condition.perfect(result.get(Feature.MYERS))));
 
 		int num = (int) Math.sqrt(map.size());
+		int j = 0;
 		for (int row = 0; row < num; row++) {
-			out.println("<div class='row'>");
+			out.print("<div class='row'>");
 			for (int column = 0; column < num; column++) {
-				out.printf("<div class='bingo-%s'></div>", map.get(row * num + column).judge() ? "ok" : "ng");
+				j++;
+				out.printf("<div class='bingo badge badge-%s'>%d</div>", map.get(j).judge() ? "success" : "error", j);
 			}
 			out.println("</div>");
 		}
