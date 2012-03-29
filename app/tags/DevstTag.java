@@ -34,7 +34,7 @@ public class DevstTag extends FastTags {
 			style += " badge-" + result;
 			popover = "rel='popover'";
 			popover += String.format(" data-original-title='%s'", result);
-			popover += String.format(" data-content='%s'", getContent(detail));
+			popover += String.format(" data-content=\"%s\"", getContent(detail));
 			label = detail.isSuccess() ? "ok" : Integer.toString(detail.getFailure());
 		}
 		out.printf("<span class='%s'%s>%s</span>", style, popover, label);
@@ -45,10 +45,11 @@ public class DevstTag extends FastTags {
 			return "Congratulations!";
 		}
 
-		StringBuilder sb = new StringBuilder("<ul>");
+		StringBuilder sb = new StringBuilder("<ul class='test-header-list'>");
 		for (Failure fail : detail.getFailures()) {
 			String name = fail.getTestHeader();
 			sb.append("<li>");
+			sb.append("<i class='icon-fire icon-error'></i> ");
 			sb.append(name.substring(0, name.lastIndexOf('(')));
 			sb.append("</li>");
 		}

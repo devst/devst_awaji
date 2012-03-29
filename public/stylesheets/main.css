@@ -28,3 +28,11 @@
 	border:1px solid #CCC;
 }
 
+.test-header-list {
+	list-style-type: none;
+	padding: 0px;
+}
+
+.icon-error {
+	background-image: url("../img/glyphicons-halflings-error.png");
+}
