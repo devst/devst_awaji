@@ -6,9 +6,9 @@ import java.util.EnumMap;
 
 import play.mvc.Controller;
 
-public class Goal extends Controller {
+public class FirstPairWork extends Controller {
 
-	private static final String TEMPLATE = "Input/goal.html";
+	private static final String TEMPLATE = "Input/firstpairwork.html";
 
 	/**
 	 * 初期表示
@@ -38,10 +38,10 @@ public class Goal extends Controller {
 	 * @return 各チームの出力を値とするEnumMap
 	 */
 	protected static EnumMap<Team, String> execute(String... args) {
-		return new TeamFeatureRunner<features.Enquete>(features.Enquete.class) {
+		return new TeamFeatureRunner<features.FirstPairWork>(features.FirstPairWork.class) {
 			@Override
-			public String run(features.Enquete feature) throws Exception {
-				return feature.getName().toString() + feature.getGoal().toString();
+			public String run(features.FirstPairWork feature) throws Exception {
+				return feature.getMembers() + "　『" + feature.getIkigomi() + "』";
 			}
 		}.run();
 	}
