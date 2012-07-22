@@ -2,3 +2,11 @@
 
 require:
     - play
+    - devst -> devst_awaji_judgeman 1.3.0
+    - devst -> devst_awaji_judgeman_judges 1.3.0
+repositories:
+    - devst-awaji-repository:
+        type:       http
+        artifact:   "http://devst-awaji-repository.s3.amazonaws.com/release/devst/[artifact]/[revision]/[artifact]-[revision].[ext]"
+        contains:
+            - devst -> *
